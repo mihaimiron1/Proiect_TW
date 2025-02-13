@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "InfoCard";
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f8e9; 
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        .card-container {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 360px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: #0056b3;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+            .card strong {
+                font-weight: bold;
+            }
+
+        .hidden-info {
+            filter: blur(6px);
+            transition: filter 0.3s ease-in-out;
+        }
+
+        .eye-icon {
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            width: 22px;
+            height: 22px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/2767/2767146.png'); /* Ochi alb-negru */
+            background-size: cover;
+        }
+
+            .eye-icon.show {
+                background-image: url('https://cdn-icons-png.flaticon.com/512/2767/2767144.png'); /* Ochi deschis */
+            }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card-title">InfoCard</div>
+        <div class="card">
+            <p>Sold: <strong>100 MDL</strong></p>
+            <p>Card Number: <span id="cardNumber" class="hidden-info">1111 2222 3333 4444</span></p>
+            <p>CVC: <span id="cvc" class="hidden-info">123</span></p>
+            <span class="eye-icon" id="eyeIcon" onclick="toggleVisibility()"></span>
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility() {
+            let cardNumber = document.getElementById('cardNumber');
+            let cvc = document.getElementById('cvc');
+            let eyeIcon = document.getElementById('eyeIcon');
+
+            if (cardNumber.classList.contains('hidden-info')) {
+                cardNumber.classList.remove('hidden-info');
+                cvc.classList.remove('hidden-info');
+                eyeIcon.classList.add('show');
+            } else {
+                cardNumber.classList.add('hidden-info');
+                cvc.classList.add('hidden-info');
+                eyeIcon.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
