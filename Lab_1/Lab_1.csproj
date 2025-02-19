@@ -94,7 +94,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AmcController.cs" />
+    <Compile Include="Controllers\exchange_rateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\transferController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -106,11 +108,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
-    <Content Include="Views\Home\InfoCard.cshtml" />
-    <Content Include="Views\Home\Profile.cshtml" />
-    <Content Include="Views\Home\TermsOfUse.cshtml" />
     <Content Include="Views\Amc\Index.cshtml" />
+    <Content Include="Views\transfer\p2p.cshtml" />
+    <Content Include="Views\transfer\a2a.cshtml" />
+    <Content Include="Views\transfer\supply.cshtml" />
+    <Content Include="Views\transfer\afm.cshtml" />
+    <Content Include="Views\transfer\Index.cshtml" />
+    <Content Include="Views\exchange_rate\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
