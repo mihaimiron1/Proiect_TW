@@ -14,7 +14,8 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden; /* Ascunde scroll-ul orizontal */
+            font-family: 'Kantumruy Pro', sans-serif;
         }
 
         .container {
@@ -29,7 +30,6 @@
             left: 2%;
             top: 2%;
             font-size: 3rem;
-            font-family: 'Instrument Sans', sans-serif;
             font-weight: 700;
             color: #163B3D;
         }
@@ -52,7 +52,6 @@
             border: 2px #1E4445 solid;
             color: #0B9CA6;
             font-size: 1rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 700;
             padding: 0.5rem 1rem;
             text-align: center;
@@ -106,7 +105,6 @@
             transform: translateY(-50%);
             color: white;
             font-size: 3rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 700;
         }
 
@@ -123,7 +121,6 @@
             border: 2px #6E9D9B solid;
             color: white;
             font-size: 1.5rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 700;
             padding: 1rem 2rem;
             text-align: center;
@@ -135,20 +132,6 @@
                 background-color: #5a7f7d;
             }
 
-        .footer-lines {
-            position: absolute;
-            width: 50%;
-            left: 25%;
-            bottom: 5%;
-            display: flex;
-            justify-content: space-between;
-        }
-
-            .footer-lines div {
-                width: 15%;
-                border: 1px #584747 solid;
-            }
-
         .support-button {
             position: absolute;
             right: 5%;
@@ -158,7 +141,6 @@
             border: 1px #C1E6E8 solid;
             color: white;
             font-size: 1rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 700;
             padding: 1rem;
             text-align: center;
@@ -178,7 +160,6 @@
             border-radius: 12px;
             color: white;
             font-size: 1rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 400;
             padding: 1rem;
             text-align: center;
@@ -203,7 +184,6 @@
             justify-content: space-around;
             color: white;
             font-size: 1rem;
-            font-family: 'Kantumruy Pro', sans-serif;
             font-weight: 400;
         }
 
@@ -215,6 +195,68 @@
                 .menu-items span:hover {
                     color: #0B9CA6;
                 }
+
+        /* Stiluri pentru conținutul adăugat */
+        .new-container {
+            width: 100%;
+            height: 100vh; /* Aceeași înălțime ca prima pagină */
+            position: relative;
+            background: linear-gradient(180deg, #C1E6E9 48%, #ffffff 100%);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Spațiu între pătrate */
+            padding: 20px; /* Padding pentru a evita marginile */
+        }
+
+        .new-section {
+            width: calc(25% - 20px); /* 4 pătrate pe rând cu spațiu între ele */
+            height: 40vh; /* Înălțime ajustată */
+            background: #67797A;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+            .new-section h2 {
+                font-size: 24px;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .new-section p {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+        .new-button {
+            width: 100%;
+            height: 56px;
+            background: #05FFB9;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            border: 1px #455B5D solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .new-button:hover {
+                background-color: #00e6a8;
+            }
+
+        .new-button-text {
+            color: #455B5D;
+            font-size: 16px;
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
@@ -231,11 +273,9 @@
         <div class="button network-button" onclick="alert('Rețea unități deschisă!')">Despre noi</div>
         <div class="button login-button" onclick="alert('Logare deschisă!')">Logare</div>
 
-
-
         <div class="main-content">
             <div class="image-container">
-                <img src="~/Content/Images/Home/Poza_2_oameni_banner_top.png"alt="Placeholder Image">
+                <img src="~/Content/Images/Home/Poza_2_oameni_banner_top.png" alt="Placeholder Image">
             </div>
             <div class="text-container">
                 <span>Ia-ți cardul</span>
@@ -245,16 +285,18 @@
             <div class="details-button" onclick="alert('Detalii deschise!')">detalii</div>
         </div>
 
-
-        <div class="footer-lines">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
         <div class="support-button" onclick="alert('Suport deschis!')">suport</div>
+        <div style="width: 245px; left: 1622px; top: 923px; position: absolute">
+            <div style="width: 167px; height: 65px; left: 0px; top: 0px; position: absolute">
+                <div style="width: 167px; height: 65px; left: 0px; top: 0px; position: absolute; background: #163B3D; border-radius: 12px"></div>
+                <div style="width: 154px; height: 47px; left: 7px; top: 4px; position: absolute; color: white; font-size: 20px; font-family: Kantumruy Pro; font-weight: 400; word-wrap: break-word">Salut, cu ce <br />te putem ajuta?</div>
+            </div>
+            <div style="width: 63px; height: 63px; left: 182px; top: 0px; position: absolute">
+                <div style="width: 63px; height: 63px; left: 0px; top: 0px; position: absolute; background: #163B3D; border-radius: 9999px; border: 1px #C1E6E8 solid"></div>
+                <div style="width: 51px; height: 22px; left: 6px; top: 28px; position: absolute; text-align: center; color: #93D5E0; font-size: 15px; font-family: Kantumruy Pro; font-weight: 600; word-wrap: break-word">suport</div>
+                <div style="width: 59px; height: 14px; left: 2px; top: 14px; position: absolute; text-align: center; color: white; font-size: 15px; font-family: Kantumruy Pro; font-weight: 700; word-wrap: break-word">AMC<br /></div>
+            </div>
+        </div>
         <div class="chat-button" onclick="alert('Chat deschis!')">Salut, cu ce te putem ajuta?</div>
         <div class="menu">
             <div class="menu-items">
@@ -267,6 +309,45 @@
                 <span onclick="alert('Curs valutar selectat!')">curs valutar</span>
                 <span onclick="alert('Caritate selectată!')">caritate</span>
                 <span onclick="alert('Mai multe selectate!')">mai multe</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conținutul adăugat -->
+    <div class="new-container">
+        <!-- Secțiunea 1 -->
+        <div class="new-section">
+            <h2>transfer de la card la card P2P</h2>
+            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
+            <div class="new-button" onclick="alert('Transfer P2P inițiat!')">
+                <div class="new-button-text">transferă acum</div>
+            </div>
+        </div>
+
+        <!-- Secțiunea 2 -->
+        <div class="new-section">
+            <h2>transfer internațional la card T2C</h2>
+            <p>primește bani din străinătate direct pe card, oricând și oriunde te-ai afla</p>
+            <div class="new-button" onclick="alert('Transfer internațional inițiat!')">
+                <div class="new-button-text">transferă acum</div>
+            </div>
+        </div>
+
+        <!-- Secțiunea 3 -->
+        <div class="new-section">
+            <h2>transfer prin număr de telefon</h2>
+            <p>transferă bani prin număr de telefon pe un card din Republica Moldova sau din străinătate</p>
+            <div class="new-button" onclick="alert('Transfer prin număr de telefon inițiat!')">
+                <div class="new-button-text">transferă acum</div>
+            </div>
+        </div>
+
+        <!-- Secțiunea 4 -->
+        <div class="new-section">
+            <h2>ask for money</h2>
+            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
+            <div class="new-button" onclick="alert('Cerere de bani inițiată!')">
+                <div class="new-button-text">transferă acum</div>
             </div>
         </div>
     </div>
