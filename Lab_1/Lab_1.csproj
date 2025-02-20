@@ -97,6 +97,8 @@
     <Compile Include="Controllers\AmcController.cs" />
     <Compile Include="Controllers\exchange_rateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\registerController.cs" />
     <Compile Include="Controllers\transferController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -116,6 +118,8 @@
     <Content Include="Views\transfer\afm.cshtml" />
     <Content Include="Views\transfer\Index.cshtml" />
     <Content Include="Views\exchange_rate\Index.cshtml" />
+    <Content Include="Views\login\Index.cshtml" />
+    <Content Include="Views\register\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

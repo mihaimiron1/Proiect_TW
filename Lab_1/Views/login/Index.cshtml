@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "login";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMC Bank - Logare</title>
+    <style>
+        /* Resetare stiluri */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Fundal general */
+        body {
+            background: linear-gradient(180deg, #ffffff 50%, #0C9CA7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container principal */
+        .login-container {
+            width: 400px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #163B3D;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-italic {
+            font-style: italic;
+        }
+
+        /* Formular */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+            .input-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 2px solid #1E4445;
+                border-radius: 8px;
+                font-size: 1rem;
+                color: #163B3D;
+                outline: none;
+                transition: border-color 0.3s;
+            }
+
+                .input-group input:focus {
+                    border-color: #0B9CA6;
+                }
+
+            .input-group label {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #6D9C9A;
+                background: white;
+                padding: 0 5px;
+                font-size: 0.9rem;
+                transition: all 0.3s;
+            }
+
+            .input-group input:focus + label,
+            .input-group input:not(:placeholder-shown) + label {
+                top: 0;
+                font-size: 0.8rem;
+                color: #0B9CA6;
+            }
+
+        /* Buton de logare */
+        .login-btn {
+            background: #0B9CA6;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .login-btn:hover {
+                background: #1E4445;
+            }
+
+        /* Link-uri suplimentare */
+        .links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+            .links a {
+                color: #0B9CA6;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .links a:hover {
+                    color: #1E4445;
+                }
+
+        /* Mesaj de bun venit */
+        .welcome-message {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #6D9C9A;
+        }
+
+            .welcome-message a {
+                color: #0B9CA6;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .welcome-message a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo -->
+        <div class="logo">
+            <span>AMC</span>
+            <span class="logo-italic">bank</span>
+        </div>
+
+        <!-- Formular de logare -->
+        <form class="login-form">
+            <div class="input-group">
+                <input type="text" id="username" placeholder=" " required>
+                <label for="username">Nume utilizator</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Parolă</label>
+            </div>
+
+            <button type="submit" class="login-btn">Loghează-te</button>
+        </form>
+
+        <!-- Link-uri suplimentare -->
+        <div class="links">
+            <a href="#">Ai uitat parola?</a>
+            <a href="/register/Index">Înregistrare</a>
+        </div>
+    </div>
+</body>
+</html>
