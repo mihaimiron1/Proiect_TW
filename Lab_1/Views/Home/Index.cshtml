@@ -1,1 +1,268 @@
-﻿
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMC Bank</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(180deg, white 62%, #0C9CA7 91%);
+        }
+
+        .logo {
+            position: absolute;
+            left: 2%;
+            top: 2%;
+            font-size: 3rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 700;
+            color: #163B3D;
+        }
+
+        .logo-italic {
+            font-style: italic;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            cursor: pointer;
+        }
+
+        .button {
+            position: absolute;
+            background: rgba(217, 217, 217, 0);
+            border-radius: 19px;
+            border: 2px #1E4445 solid;
+            color: #0B9CA6;
+            font-size: 1rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .button:hover {
+                background-color: #1E4445;
+                color: white;
+            }
+
+        .network-button {
+            right: 20%;
+            top: 2%;
+        }
+
+        .login-button {
+            right: 10%;
+            top: 2%;
+        }
+
+        .main-content {
+            position: absolute;
+            width: 100%;
+            height: 70vh;
+            top: 20vh;
+            background: linear-gradient(90deg, #527D7D 0%, #163B3D 32%, #163B3D 69%, #8EBFBD 95%);
+        }
+
+        .image-container {
+            position: absolute;
+            width: 60%;
+            height: 70vh;
+            left: 30%;
+            top: 20vh;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+        }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .text-container {
+            position: absolute;
+            width: 40%;
+            left: 2%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 700;
+        }
+
+            .text-container span {
+                display: block;
+            }
+
+        .details-button {
+            position: absolute;
+            left: 2%;
+            bottom: 10%;
+            background: #6D9C9A;
+            border-radius: 30.5px;
+            border: 2px #6E9D9B solid;
+            color: white;
+            font-size: 1.5rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .details-button:hover {
+                background-color: #5a7f7d;
+            }
+
+        .footer-lines {
+            position: absolute;
+            width: 50%;
+            left: 25%;
+            bottom: 5%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .footer-lines div {
+                width: 15%;
+                border: 1px #584747 solid;
+            }
+
+        .support-button {
+            position: absolute;
+            right: 5%;
+            bottom: 5%;
+            background: #163B3D;
+            border-radius: 9999px;
+            border: 1px #C1E6E8 solid;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 700;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .support-button:hover {
+                background-color: #0B9CA6;
+            }
+
+        .chat-button {
+            position: absolute;
+            right: 20%;
+            bottom: 5%;
+            background: #163B3D;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 400;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .chat-button:hover {
+                background-color: #0B9CA6;
+            }
+
+        .menu {
+            position: absolute;
+            width: 100%;
+            top: 10%;
+            background: linear-gradient(90deg, #163B3D 69%, #8EBFBD 95%);
+            padding: 1rem 0;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-weight: 400;
+        }
+
+            .menu-items span {
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+                .menu-items span:hover {
+                    color: #0B9CA6;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <span>AMC</span>
+            <span class="logo-italic">bank</span>
+        </div>
+        <div class="search-icon" onclick="alert('Căutare activată!')">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 24L16.5 16.5M1 10C1 14.9706 5.02944 19 10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10Z" stroke="#455B5D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div class="button network-button" onclick="alert('Rețea unități deschisă!')">Rețea unități</div>
+        <div class="button login-button" onclick="alert('Logare deschisă!')">Logare</div>
+        <div class="main-content"></div>
+        <div class="image-container">
+            <img src="https://placehold.co/1203x762" alt="Placeholder Image">
+        </div>
+        <div class="text-container">
+            <span>Ia-ți cardul</span>
+            <span class="logo-italic">AMC bank</span>
+            <span>în câteva clipe!</span>
+        </div>
+        <div class="details-button" onclick="alert('Detalii deschise!')">detalii</div>
+        <div class="footer-lines">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="support-button" onclick="alert('Suport deschis!')">suport</div>
+        <div class="chat-button" onclick="alert('Chat deschis!')">Salut, cu ce te putem ajuta?</div>
+        <div class="menu">
+            <div class="menu-items">
+                <span onclick="alert('Credite selectate!')">credite</span>
+                <span onclick="alert('Depozite selectate!')">depozite</span>
+                <span onclick="alert('Carduri selectate!')">carduri</span>
+                <span onclick="alert('Depozite selectate!')">depozite</span>
+                <span onclick="alert('Obligațiuni selectate!')">obligațiuni</span>
+                <span onclick="alert('Plăți și transferuri selectate!')">plăți și transferuri</span>
+                <span onclick="alert('Curs valutar selectat!')">curs valutar</span>
+                <span onclick="alert('Caritate selectată!')">caritate</span>
+                <span onclick="alert('Mai multe selectate!')">mai multe</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
