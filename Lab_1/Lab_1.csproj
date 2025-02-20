@@ -96,8 +96,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AmcController.cs" />
     <Compile Include="Controllers\exchange_rateController.cs" />
+    <Compile Include="Controllers\helpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\ObligatiuniController.cs" />
+    <Compile Include="Controllers\profileController.cs" />
     <Compile Include="Controllers\registerController.cs" />
     <Compile Include="Controllers\transferController.cs" />
     <Compile Include="Global.asax.cs">
@@ -111,7 +114,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Amc\Index.cshtml" />
+    <Content Include="Views\Amc\aboutus.cshtml" />
     <Content Include="Views\transfer\p2p.cshtml" />
     <Content Include="Views\transfer\a2a.cshtml" />
     <Content Include="Views\transfer\supply.cshtml" />
@@ -120,6 +123,10 @@
     <Content Include="Views\exchange_rate\Index.cshtml" />
     <Content Include="Views\login\Index.cshtml" />
     <Content Include="Views\register\index.cshtml" />
+    <Content Include="Views\help\afh.cshtml" />
+    <Content Include="Views\profile\Index.cshtml" />
+    <Content Include="Views\profile\cards.cshtml" />
+    <Content Include="Views\Obligatiuni\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

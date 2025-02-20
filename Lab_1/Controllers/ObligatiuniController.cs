@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Lab_1.Controllers
 {
-    public class AmcController : Controller
+    public class ObligatiuniController : Controller
     {
-        // GET: Amc
-        public ActionResult aboutus()
+        // GET: Obligatiuni
+        public ActionResult Index()
         {
             return View();
         }
