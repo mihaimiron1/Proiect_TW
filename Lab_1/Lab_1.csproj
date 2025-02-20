@@ -97,9 +97,11 @@
     <Compile Include="Controllers\AmcController.cs" />
     <Compile Include="Controllers\exchange_rateController.cs" />
     <Compile Include="Controllers\helpController.cs" />
+    <Compile Include="Controllers\historyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\ObligatiuniController.cs" />
+    <Compile Include="Controllers\payController.cs" />
     <Compile Include="Controllers\profileController.cs" />
     <Compile Include="Controllers\registerController.cs" />
     <Compile Include="Controllers\transferController.cs" />
@@ -127,6 +129,12 @@
     <Content Include="Views\profile\Index.cshtml" />
     <Content Include="Views\profile\cards.cshtml" />
     <Content Include="Views\Obligatiuni\Index.cshtml" />
+    <Content Include="Views\history\Index.cshtml" />
+    <Content Include="Views\pay\Index.cshtml" />
+    <Content Include="Views\pay\charity.cshtml" />
+    <Content Include="Views\pay\rca.cshtml" />
+    <Content Include="Views\pay\greencard.cshtml" />
+    <Content Include="Views\pay\travel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

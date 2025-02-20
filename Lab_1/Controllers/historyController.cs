@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace Lab_1.Controllers
 {
-    public class HomeController : Controller
+    public class historyController : Controller
     {
-        // GET: Home
+        // GET: history
         public ActionResult Index()
         {
             return View();
         }
-
-        
     }
 }
