@@ -29,7 +29,7 @@ namespace Lab_1.Controllers
             return View();
         }
 
-        public ActionResult supply()
+        public ActionResult t2c()
         {
             return View();
         }

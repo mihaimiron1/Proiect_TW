@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Home\Poza_2_oameni_banner_top.png" />
+    <Content Include="Content\Images\transfer\AMC_black_card.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -119,7 +120,7 @@
     <Content Include="Views\Amc\aboutus.cshtml" />
     <Content Include="Views\transfer\p2p.cshtml" />
     <Content Include="Views\transfer\a2a.cshtml" />
-    <Content Include="Views\transfer\supply.cshtml" />
+    <Content Include="Views\transfer\t2c.cshtml" />
     <Content Include="Views\transfer\afm.cshtml" />
     <Content Include="Views\transfer\Index.cshtml" />
     <Content Include="Views\exchange_rate\Index.cshtml" />
