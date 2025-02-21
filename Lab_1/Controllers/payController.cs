@@ -13,5 +13,18 @@ namespace Lab_1.Controllers
         {
             return View();
         }
+        public ActionResult rca()
+        {
+            return View();
+        }
+        public ActionResult greencard()
+        {
+            return View();
+        }
+        public ActionResult travel()
+        {
+            return View();
+        }
+        
     }
 }

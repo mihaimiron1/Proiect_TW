@@ -3,5 +3,404 @@
     ViewBag.Title = "Index";
 }
 
-<h2>account to account</h2>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMC Bank</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* Ascunde scroll-ul orizontal */
+            font-family: 'Kantumruy Pro', sans-serif;
+        }
 
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(180deg, white 62%, #0C9CA7 91%);
+        }
+
+        .logo {
+            position: absolute;
+            left: 2%;
+            top: 2%;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #163B3D;
+        }
+
+        .logo-italic {
+            font-style: italic;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            cursor: pointer;
+        }
+
+        .button {
+            position: absolute;
+            background: rgba(217, 217, 217, 0);
+            border-radius: 19px;
+            border: 2px #1E4445 solid;
+            color: #0B9CA6;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .button:hover {
+                background-color: #1E4445;
+                color: white;
+            }
+
+        .network-button {
+            right: 10%;
+            top: 2%;
+        }
+
+        .login-button {
+            right: 3%;
+            top: 2%;
+        }
+
+        .menu {
+            position: absolute;
+            width: 100%;
+            top: 10%;
+            background: linear-gradient(90deg, #163B3D 69%, #8EBFBD 95%);
+            padding: 1rem 0;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+            .menu-items span {
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+                .menu-items span:hover {
+                    color: #0B9CA6;
+                }
+
+        /* Stiluri pentru secțiunile de tranzacții */
+        .transaction-sections {
+            position: absolute;
+            width: 100%;
+            top: 30vh; /* Mai mult spațiu între chenare și banner */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Spațiu între chenare */
+            padding: 0px;
+        }
+
+        .transaction-section {
+            width: 20%;
+            height: 300px; /* Chenare mai lungi */
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+            .transaction-section h2 {
+                font-size: 24px;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .transaction-section p {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            /* Stiluri pentru ultimele două chenare */
+            .transaction-section.black-text {
+                color: black; /* Text negru pentru ultimele două chenare */
+            }
+
+        .transaction-button {
+            width: 100%;
+            height: 56px;
+            background: #05FFB9;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            border: 1px #455B5D solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .transaction-button:hover {
+                background-color: #00e6a8;
+            }
+
+        .transaction-button-text {
+            color: #455B5D;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        /* Stiluri pentru textul "Tranzacții" */
+        .transactions-title {
+            position: absolute;
+            left: 3%;
+            top: 20vh; /* Poziționat deasupra chenarelor */
+            font-size: 2rem;
+            font-weight: 700;
+            color: #163B3D;
+        }
+
+        /* Stiluri pentru fereastra plutitoare */
+        .floating-window {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #163B3D;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+            .floating-window:hover {
+                background-color: #0B9CA6;
+            }
+
+                .floating-window:hover::after {
+                    content: "Salut, cu ce te putem ajuta?";
+                    position: absolute;
+                    right: 70px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: #163B3D;
+                    color: white;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    white-space: nowrap;
+                }
+
+            .floating-window span {
+                text-align: center;
+                line-height: 1.2;
+            }
+
+                .floating-window span:first-child {
+                    font-weight: bold;
+                }
+
+                .floating-window span:last-child {
+                    color: #93D5E0; /* Culoarea pentru "suport" */
+                    font-size: 0.7rem;
+                }
+
+        /* Stiluri pentru fereastra pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            right: 20px;
+            bottom: 90px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            text-align: center;
+        }
+
+            .popup h3 {
+                margin: 0 0 10px;
+                font-size: 18px;
+                color: #163B3D;
+            }
+
+            .popup p {
+                margin: 0;
+                font-size: 14px;
+                color: #455B5D;
+            }
+
+            .popup textarea {
+                width: 100%;
+                height: 80px;
+                margin-top: 10px;
+                padding: 0px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 14px;
+                resize: none;
+            }
+
+            .popup button {
+                margin-top: 10px;
+                padding: 5px 10px;
+                background: #05FFB9;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .popup button:hover {
+                    background-color: #00e6a8;
+                }
+
+            .popup .confirmation-message {
+                display: none;
+                margin-top: 10px;
+                font-size: 14px;
+                color: #163B3D;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <span>AMC</span>
+            <span class="logo-italic">bank</span>
+        </div>
+        <div class="search-icon" onclick="alert('Căutare activată!')">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 24L16.5 16.5M1 10C1 14.9706 5.02944 19 10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10Z" stroke="#455B5D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div class="button network-button" onclick="alert('Rețea unități deschisă!')">Despre noi</div>
+        <div class="button login-button" onclick="alert('Logare deschisă!')">Logare</div>
+
+        <!-- Textul "Tranzacții" deasupra chenarelor -->
+        <div class="transactions-title">Tranzacții</div>
+
+        <div class="transaction-sections">
+            <div class="transaction-section" style="background: #67797A;">
+                <h2>Transfer Card P2P</h2>
+                <p>Transferă bani de la card la card în doar câteva minute, rapid și sigur.</p>
+                <div class="transaction-button">
+                    <span class="transaction-button-text">Transferă acum</span>
+                </div>
+            </div>
+            <div class="transaction-section" style="background: #ec6d7b;">
+                <h2>Transfer Internațional</h2>
+                <p>Primește bani din străinătate direct pe card, oricând și oriunde te-ai afla.</p>
+                <div class="transaction-button">
+                    <span class="transaction-button-text">Transferă acum</span>
+                </div>
+            </div>
+            <div class="transaction-section black-text" style="background: #3fafb7;">
+                <h2>Transfer prin Telefon</h2>
+                <p>Transferă bani prin număr de telefon pe un card din Republica Moldova sau din străinătate.</p>
+                <div class="transaction-button">
+                    <span class="transaction-button-text">Transferă acum</span>
+                </div>
+            </div>
+            <div class="transaction-section black-text" style="background: #eedc67;">
+                <h2>Transfer Sum</h2>
+                <p>Transferă bani de la card la card în doar câteva minute, rapid și sigur.</p>
+                <div class="transaction-button">
+                    <span class="transaction-button-text">Transferă acum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-items">
+                <span onclick="alert('Credite selectate!')">credite</span>
+                <span onclick="alert('Depozite selectate!')">depozite</span>
+                <span onclick="alert('Carduri selectate!')">carduri</span>
+                <span onclick="alert('Depozite selectate!')">depozite</span>
+                <span onclick="alert('Obligațiuni selectate!')">obligațiuni</span>
+                <span onclick="alert('Plăți și transferuri selectate!')">plăți și transferuri</span>
+                <span onclick="alert('Curs valutar selectat!')">curs valutar</span>
+                <span onclick="alert('Caritate selectată!')">caritate</span>
+                <span onclick="alert('Mai multe selectate!')">mai multe</span>
+            </div>
+        </div>
+
+        <!-- Fereastra plutitoare -->
+        <div class="floating-window" onclick="togglePopup(event)">
+            <span>AMC</span>
+            <span>suport</span>
+        </div>
+
+        <!-- Fereastra pop-up -->
+        <div class="popup" id="popup">
+            <h3>Ajutor și suport</h3>
+            <p>Cu ce te putem ajuta astăzi?</p>
+            <textarea placeholder="Scrie mesajul tău aici..."></textarea>
+            <button onclick="sendMessage()">Trimite</button>
+            <div class="confirmation-message" id="confirmationMessage">
+                Mulțumim pentru mesaj! Echipa noastră vă va reveni în cel mai scurt timp.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePopup(event) {
+            event.stopPropagation(); // Previne închiderea imediată a pop-up-ului
+            var popup = document.getElementById("popup");
+            var confirmationMessage = document.getElementById("confirmationMessage");
+            if (popup.style.display === "block") {
+                popup.style.display = "none";
+            } else {
+                popup.style.display = "block";
+                confirmationMessage.style.display = "none"; // Ascunde mesajul de confirmare când pop-up-ul este deschis din nou
+            }
+        }
+
+        function sendMessage() {
+            var textarea = document.querySelector('.popup textarea');
+            var message = textarea.value;
+            if (message.trim() !== "") {
+                var confirmationMessage = document.getElementById("confirmationMessage");
+                confirmationMessage.style.display = "block";
+                textarea.value = ""; // Golește câmpul de text după trimitere
+            } else {
+                alert("Te rugăm să scrii un mesaj înainte de a trimite.");
+            }
+        }
+
+        // Închide pop-up-ul când se face click în afara lui
+        document.addEventListener('click', function (event) {
+            var popup = document.getElementById("popup");
+            var floatingWindow = document.querySelector('.floating-window');
+            if (popup.style.display === "block" && !popup.contains(event.target) && !floatingWindow.contains(event.target)) {
+                popup.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
