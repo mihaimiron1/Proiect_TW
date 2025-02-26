@@ -197,6 +197,8 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Pay\water.cshtml" />
+    <Content Include="Views\Pay\gas.cshtml" />
+    <Content Include="Views\Pay\electricity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

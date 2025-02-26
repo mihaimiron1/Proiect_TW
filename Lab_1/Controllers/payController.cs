@@ -34,6 +34,13 @@ namespace Lab_1.Controllers
         {
             return View();
         }
-
+        public ActionResult gas()
+        {
+            return View();
+        }
+        public ActionResult electricity()
+        {
+            return View();
+        }
     }
 }
