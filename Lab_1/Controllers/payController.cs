@@ -30,6 +30,10 @@ namespace Lab_1.Controllers
         {
             return View();
         }
+        public ActionResult water()
+        {
+            return View();
+        }
 
     }
 }
