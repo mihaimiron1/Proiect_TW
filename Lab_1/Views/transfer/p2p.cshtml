@@ -107,6 +107,12 @@
             left: 5%;
             width: 90%;
             text-align: center;
+            margin-bottom: 150px; /* Added margin for spacing */
+        }
+        .transfer-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
         }
 
         .transfer-title {
@@ -347,18 +353,38 @@
                         <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
                     </div>
                     <div class="card-details">
+
+
+
+
                         <div class="input-group">
                             <label for="expeditor-card">Număr card expeditor</label>
-                            <input type="text" id="expeditor-card" placeholder="Introdu numărul cardului">
+                            <input type="text" id="expeditor-card" placeholder="0000 0000 0000 0000" required
+                               pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
+                               title="Introdu 16 cifre cu spații după fiecare 4 cifre">
                         </div>
+
+
                         <div class="input-group">
                             <label for="expeditor-name">Prenume Nume</label>
                             <input type="text" id="expeditor-name" placeholder="Introdu prenumele și numele">
                         </div>
+
+
+
                         <div class="input-group">
                             <label for="expeditor-validity">Perioada de valabilitate</label>
-                            <input type="text" id="expeditor-validity" placeholder="MM/YY">
+                            <input type="text" id="expeditor-validity" placeholder="MM/YY" required
+                                   pattern="\d{2}\/\d{2}"
+                                   title="Introdu luna și anul în format MM/YY">
                         </div>
+
+
+
+
+
+
+
                     </div>
                 </div>
 
@@ -372,10 +398,17 @@
                         <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
                     </div>
                     <div class="card-details">
+
+
                         <div class="input-group">
                             <label for="beneficiar-card">Număr card beneficiar</label>
-                            <input type="text" id="beneficiar-card" placeholder="Introdu numărul cardului">
+                            <input type="text" id="beneficiar-card" placeholder="0000 0000 0000 0000" required
+                                   pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
+                                   title="Introdu 16 cifre cu spații după fiecare 4 cifre">
                         </div>
+
+
+
                         <div class="input-group">
                             <label for="beneficiar-name">Prenume Nume</label>
                             <input type="text" id="beneficiar-name" placeholder="Introdu prenumele și numele">
@@ -390,7 +423,7 @@
                     <label for="amount">Sumă (MDL)</label>
                     <input type="number" id="amount" placeholder="Introdu suma">
                 </div>
-                <button class="transfer-button" onclick="alert('Transfer inițiat!')">Transferă acum</button>
+                <button class="transfer-button" id="transferButton" disabled>Transferă acum</button>
             </div>
         </div>
 
@@ -427,6 +460,84 @@
     </div>
 
     <script>
+        // Card Number Formatting
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\D/g, '').substring(0,16);
+            let formatted = value.match(/.{1,4}/g);
+            input.value = formatted ? formatted.join(' ') : '';
+        }
+
+        // Expiry Date Formatting
+        function formatExpiryDate(input) {
+            let value = input.value.replace(/\D/g, '').substring(0,4);
+            if(value.length >= 2) {
+                input.value = value.slice(0,2) + '/' + value.slice(2,4);
+            } else {
+                input.value = value;
+            }
+        }
+
+        // Input Validation
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[required]');
+            const amount = document.getElementById('amount');
+            const button = document.getElementById('transferButton');
+            
+            let isValid = true;
+            inputs.forEach(input => {
+                if(!input.checkValidity()) isValid = false;
+            });
+            
+            if(!amount.value || isNaN(amount.value) || amount.value <= 0) isValid = false;
+            
+            button.disabled = !isValid;
+        }
+
+        // Event Listeners
+        document.getElementById('expeditor-card').addEventListener('input', function(e) {
+            formatCardNumber(e.target);
+            validateForm();
+        });
+
+        document.getElementById('beneficiar-card').addEventListener('input', function(e) {
+            formatCardNumber(e.target);
+            validateForm();
+        });
+
+        document.getElementById('expeditor-validity').addEventListener('input', function(e) {
+            formatExpiryDate(e.target);
+            validateForm();
+        });
+
+        // Add validation for all inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', validateForm);
+        });
+
+        // Transfer Button Handler
+        document.getElementById('transferButton').addEventListener('click', function(e) {
+            if(!this.disabled) {
+                e.preventDefault();
+                alert('Transfer inițiat!');
+                // Add actual transfer logic here
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         function togglePopup(event) {
             event.stopPropagation(); // Previne închiderea imediată a pop-up-ului
             var popup = document.getElementById("popup");
