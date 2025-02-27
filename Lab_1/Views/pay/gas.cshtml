@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "gas";
 }
 
 <!DOCTYPE html>
@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMC Bank</title>
+    <title>AMC Bank - Profil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -271,6 +272,39 @@
                 font-size: 14px;
                 color: #163B3D;
             }
+
+        .custom-input {
+            border: 2px solid #1E4445;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #163B3D;
+        }
+
+            .custom-input:focus {
+                border-color: #0B9CA6;
+                box-shadow: 0 0 0 0.2rem rgba(11, 156, 166, 0.25);
+            }
+
+        .form-check-input {
+            border: 2px solid #1E4445;
+        }
+
+            .form-check-input:checked {
+                background-color: #0B9CA6;
+                border-color: #0B9CA6;
+            }
+
+        /* Ascunde săgețile din input-ul numeric */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 <body>
@@ -351,6 +385,49 @@
                             </div>
                         </div>
 
+                        <!-- Sectiunea Plata Facturi -->
+                        <div class="mt-5">
+                            <h3 style="color: #163B3D; font-weight: 600; margin-bottom: 1.5rem;">Plată facturi</h3>
+
+                            <div class="mb-4">
+                                <div class="info-label">Furnizor</div>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="furnizor" id="moldova-gaz" checked>
+                                        <label class="form-check-label info-value" for="moldova-gaz">
+                                            Moldova gaz
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="furnizor" id="chisinau-gaz">
+                                        <label class="form-check-label info-value" for="chisinau-gaz">
+                                            Chișinău gaz
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="info-label">Număr factură</div>
+                                <input type="text" class="form-control custom-input"
+                                       placeholder="Introduceți numărul facturii">
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="info-label">Sumă (LEI)</div>
+                                <input type="number"
+                                       class="form-control custom-input"
+                                       placeholder="Introduceți suma"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            </div>
+
+                            <button class="button-custom mt-3"
+                                    style="padding: 0.75rem 2rem; font-size: 1.1rem;"
+                                    onclick="alert('Plată efectuată cu succes!')">
+                                Efectuează plata
+                            </button>
+                        </div>
+
                         <!-- Card Section -->
                         <div class="card-section">
                             <div class="d-flex justify-content-between align-items-center">
@@ -373,17 +450,16 @@
                                 <div class="cvv-display">
                                     <button class="btn btn-sm"
                                             style="background: rgba(255,255,255,0.2); color: white; border: none;"
-                                            onclick="toggleCVV()">
+                                            onclick="toggleCVV(event)">
                                         Afișează CVV
                                     </button>
-                                    <div id="cvvValue" style="display: none; margin-top: 5px;">123</div>
+                                    <div id="cvvValue" style="display: none; margin-top: 5px; font-size: 1.2rem;">•••</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <!-- Floating window and popup -->
             <div class="floating-window" onclick="togglePopup(event)">
@@ -435,18 +511,29 @@
                 }
             });
 
-            function toggleCVV() {
+            // Funcția actualizată pentru afișare CVV
+            function toggleCVV(event) {
+                event.preventDefault();
                 const cvvElement = document.getElementById('cvvValue');
-                if (cvvElement.style.display === 'none') {
+                const button = event.target.closest('button');
+
+                if (cvvElement.textContent === '•••') {
+                    cvvElement.textContent = '123'; // Valoarea reală din backend
                     cvvElement.style.display = 'block';
+                    button.textContent = 'Ascunde CVV';
+
                     setTimeout(() => {
+                        cvvElement.textContent = '•••';
                         cvvElement.style.display = 'none';
+                        button.textContent = 'Afișează CVV';
                     }, 5000);
                 } else {
+                    cvvElement.textContent = '•••';
                     cvvElement.style.display = 'none';
+                    button.textContent = 'Afișează CVV';
                 }
             }
         </script>
+    </div>
 </body>
 </html>
-

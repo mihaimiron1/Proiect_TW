@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Lab_1.Controllers
 {
-    public class payController : Controller
+    public class PayController : Controller
     {
         // GET: pay
         public ActionResult Index()
@@ -25,6 +25,22 @@ namespace Lab_1.Controllers
         {
             return View();
         }
-        
+
+        public ActionResult charity()
+        {
+            return View();
+        }
+        public ActionResult water()
+        {
+            return View();
+        }
+        public ActionResult gas()
+        {
+            return View();
+        }
+        public ActionResult electricity()
+        {
+            return View();
+        }
     }
 }
