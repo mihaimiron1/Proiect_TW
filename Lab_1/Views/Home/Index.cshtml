@@ -1,357 +1,341 @@
 ﻿@{
-    Layout = null;
+     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMC Bank</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden; /* Ascunde scroll-ul orizontal */
-            font-family: 'Kantumruy Pro', sans-serif;
-        }
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>AMC Bank</title>
+     <style>
+          body, html {
+               margin: 0;
+               padding: 0;
+               width: 100%;
+               height: 100%;
+               overflow-x: hidden; /* Ascunde scroll-ul orizontal */
+               font-family: 'Kantumruy Pro', sans-serif;
+          }
 
-        .container {
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            background: linear-gradient(180deg, white 62%, #0C9CA7 91%);
-        }
+          .container {
+               width: 100%;
+               height: 100vh;
+               position: relative;
+               background: linear-gradient(180deg, white 62%, #0C9CA7 91%);
+          }
 
-        .logo {
-            position: absolute;
-            left: 2%;
-            top: 2%;
-            font-size: 3rem;
-            font-weight: 700;
-            color: #163B3D;
-        }
+          .logo {
+               position: absolute;
+               left: 2%;
+               top: 2%;
+               font-size: 3rem;
+               font-weight: 700;
+               color: #163B3D;
+          }
 
-        .logo-italic {
-            font-style: italic;
-        }
+          .logo-italic {
+               font-style: italic;
+          }
 
-        .search-icon {
-            position: absolute;
-            right: 5%;
-            top: 10%;
-            cursor: pointer;
-        }
+          .search-icon {
+               position: absolute;
+               right: 5%;
+               top: 10%;
+               cursor: pointer;
+          }
 
-        .button {
-            position: absolute;
-            background: rgba(217, 217, 217, 0);
-            border-radius: 19px;
-            border: 2px #1E4445 solid;
-            color: #0B9CA6;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
+          .button {
+               position: absolute;
+               background: rgba(217, 217, 217, 0);
+               border-radius: 19px;
+               border: 2px #1E4445 solid;
+               color: #0B9CA6;
+               font-size: 1rem;
+               font-weight: 700;
+               padding: 0.5rem 1rem;
+               text-align: center;
+               cursor: pointer;
+               transition: background-color 0.3s, color 0.3s;
+          }
 
-            .button:hover {
-                background-color: #1E4445;
-                color: white;
-            }
+               .button:hover {
+                    background-color: #1E4445;
+                    color: white;
+               }
 
-        .network-button {
-            right: 10%;
-            top: 2%;
-        }
+          .network-button {
+               right: 10%;
+               top: 2%;
+          }
 
-        .login-button {
-            right: 3%;
-            top: 2%;
-        }
+          .login-button {
+               right: 3%;
+               top: 2%;
+          }
 
-        .main-content {
-            position: absolute;
-            width: 100%;
-            height: 70vh;
-            top: 16vh;
-            background: linear-gradient(90deg, #527D7D 0%, #163B3D 32%, #163B3D 69%, #8EBFBD 95%);
-        }
+          .main-content {
+               position: absolute;
+               width: 100%;
+               height: 70vh;
+               top: 16vh;
+               background: linear-gradient(90deg, #527D7D 0%, #163B3D 32%, #163B3D 69%, #8EBFBD 95%);
+          }
 
-        .image-container {
-            position: absolute;
-            width: 60%;
-            height: 70vh;
-            left: 30%;
-            top: 0vh;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
-        }
+          .image-container {
+               position: absolute;
+               width: 60%;
+               height: 70vh;
+               left: 30%;
+               top: 0vh;
+               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+          }
 
-            .image-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+               .image-container img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+               }
 
-        .text-container {
-            position: absolute;
-            width: 40%;
-            left: 2%;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 3rem;
-            font-weight: 700;
-        }
+          .text-container {
+               position: absolute;
+               width: 40%;
+               left: 2%;
+               top: 50%;
+               transform: translateY(-50%);
+               color: white;
+               font-size: 3rem;
+               font-weight: 700;
+          }
 
-            .text-container span {
-                display: block;
-            }
+               .text-container span {
+                    display: block;
+               }
 
-        .details-button {
-            position: absolute;
-            left: 2%;
-            bottom: 10%;
-            background: #6D9C9A;
-            border-radius: 30.5px;
-            border: 2px #6E9D9B solid;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            padding: 1rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+          .details-button {
+               position: absolute;
+               left: 2%;
+               bottom: 10%;
+               background: #6D9C9A;
+               border-radius: 30.5px;
+               border: 2px #6E9D9B solid;
+               color: white;
+               font-size: 1.5rem;
+               font-weight: 700;
+               padding: 1rem 2rem;
+               text-align: center;
+               cursor: pointer;
+               transition: background-color 0.3s;
+          }
 
-            .details-button:hover {
-                background-color: #5a7f7d;
-            }
+               .details-button:hover {
+                    background-color: #5a7f7d;
+               }
 
-        .support-button {
-            position: absolute;
-            right: 5%;
-            bottom: 5%;
-            background: #163B3D;
-            border-radius: 9999px;
-            border: 1px #C1E6E8 solid;
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+          .support-button {
+               position: absolute;
+               right: 5%;
+               bottom: 5%;
+               background: #163B3D;
+               border-radius: 9999px;
+               border: 1px #C1E6E8 solid;
+               color: white;
+               font-size: 1rem;
+               font-weight: 700;
+               padding: 1rem;
+               text-align: center;
+               cursor: pointer;
+               transition: background-color 0.3s;
+          }
 
-            .support-button:hover {
-                background-color: #0B9CA6;
-            }
+               .support-button:hover {
+                    background-color: #0B9CA6;
+               }
 
-        .chat-button {
-            position: absolute;
-            right: 20%;
-            bottom: 5%;
-            background: #163B3D;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 400;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+          .chat-button {
+               position: absolute;
+               right: 20%;
+               bottom: 5%;
+               background: #163B3D;
+               border-radius: 12px;
+               color: white;
+               font-size: 1rem;
+               font-weight: 400;
+               padding: 1rem;
+               text-align: center;
+               cursor: pointer;
+               transition: background-color 0.3s;
+          }
 
-            .chat-button:hover {
-                background-color: #0B9CA6;
-            }
+               .chat-button:hover {
+                    background-color: #0B9CA6;
+               }
 
-        .menu {
-            position: absolute;
-            width: 100%;
-            top: 10%;
-            background: linear-gradient(90deg, #163B3D 69%, #8EBFBD 95%);
-            padding: 1rem 0;
-        }
+          .menu {
+               position: absolute;
+               width: 100%;
+               top: 10%;
+               background: linear-gradient(90deg, #163B3D 69%, #8EBFBD 95%);
+               padding: 1rem 0;
+          }
 
-        .menu-items {
-            display: flex;
-            justify-content: space-around;
-            color: white;
-            font-size: 1rem;
-            font-weight: 400;
-        }
+          .menu-items {
+               display: flex;
+               justify-content: space-around;
+               color: white;
+               font-size: 1rem;
+               font-weight: 400;
+          }
 
-            .menu-items span {
-                cursor: pointer;
-                transition: color 0.3s;
-            }
+               .menu-items span {
+                    cursor: pointer;
+                    transition: color 0.3s;
+               }
 
-                .menu-items span:hover {
-                    color: #0B9CA6;
-                }
+                    .menu-items span:hover {
+                         color: #0B9CA6;
+                    }
 
-        /* Stiluri pentru conținutul adăugat */
-        .new-container {
-            width: 100%;
-            height: 100vh; /* Aceeași înălțime ca prima pagină */
-            position: relative;
-            background: linear-gradient(180deg, #C1E6E9 48%, #ffffff 100%);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* Spațiu între pătrate */
-            padding: 20px; /* Padding pentru a evita marginile */
-        }
+          /* Stiluri pentru conținutul adăugat */
+          .new-container {
+               width: 100%;
+               height: 100vh; /* Aceeași înălțime ca prima pagină */
+               position: relative;
+               background: linear-gradient(180deg, #C1E6E9 48%, #ffffff 100%);
+               display: flex;
+               flex-wrap: wrap;
+               justify-content: center;
+               align-items: center;
+               gap: 20px; /* Spațiu între pătrate */
+               padding: 20px; /* Padding pentru a evita marginile */
+          }
 
-        .new-section {
-            width: calc(25% - 20px); /* 4 pătrate pe rând cu spațiu între ele */
-            height: 40vh; /* Înălțime ajustată */
-            background: #67797A;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
+          .new-section {
+               width: calc(25% - 20px); /* 4 pătrate pe rând cu spațiu între ele */
+               height: 40vh; /* Înălțime ajustată */
+               background: #67797A;
+               display: flex;
+               flex-direction: column;
+               justify-content: space-between;
+               padding: 20px;
+               color: white;
+               border-radius: 10px;
+               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          }
 
-            .new-section h2 {
-                font-size: 24px;
-                font-weight: 700;
-                margin: 0;
-            }
+               .new-section h2 {
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 0;
+               }
 
-            .new-section p {
-                font-size: 16px;
-                font-weight: 500;
-            }
+               .new-section p {
+                    font-size: 16px;
+                    font-weight: 500;
+               }
 
-        .new-button {
-            width: 100%;
-            height: 56px;
-            background: #05FFB9;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 28px;
-            border: 1px #455B5D solid;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+          .new-button {
+               width: 100%;
+               height: 56px;
+               background: #05FFB9;
+               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+               border-radius: 28px;
+               border: 1px #455B5D solid;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               cursor: pointer;
+               transition: background-color 0.3s;
+          }
 
-            .new-button:hover {
-                background-color: #00e6a8;
-            }
+               .new-button:hover {
+                    background-color: #00e6a8;
+               }
 
-        .new-button-text {
-            color: #455B5D;
-            font-size: 16px;
-            font-weight: 400;
-        }
-    </style>
+          .new-button-text {
+               color: #455B5D;
+               font-size: 16px;
+               font-weight: 400;
+          }
+     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <span>AMC</span>
-            <span class="logo-italic">bank</span>
-        </div>
-        <div class="search-icon" onclick="alert('Căutare activată!')">
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 24L16.5 16.5M1 10C1 14.9706 5.02944 19 10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10Z" stroke="#455B5D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </div>
-        <div class="button network-button" onclick="alert('Rețea unități deschisă!')">Despre noi</div>
-        <div class="button login-button" onclick="alert('Logare deschisă!')">Logare</div>
+     <div class="container">
+          <div class="logo">
+               <span>AMC</span>
+               <span class="logo-italic">bank</span>
+          </div>
+          <div class="search-icon" onclick="alert('Căutare activată!')">
+               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 24L16.5 16.5M1 10C1 14.9706 5.02944 19 10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10Z" stroke="#455B5D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+               </svg>
+          </div>
+          <div class="button network-button" onclick="alert('Rețea unități deschisă!')">Despre noi</div>
+          <div class="button login-button" onclick="alert('Logare deschisă!')">Logare</div>
+          <div class="main-content"></div>
+          <div class="image-container">
+               <img src="~/Content/Images/Home/Poza_2_oameni_banner_top.png" alt="Placeholder Image">
+          </div>
+          <div class="text-container">
+               <span>Ia-ți cardul</span>
+               <span class="logo-italic">AMC bank</span>
+               <span>în câteva clipe!</span>
+          </div>
+          <div class="details-button" onclick="alert('Detalii deschise!')">detalii</div>
+          <div class="support-button" onclick="alert('Suport deschis!')">suport</div>
+          <div class="chat-button" onclick="alert('Chat deschis!')">Salut, cu ce te putem ajuta?</div>
+          <div class="menu">
+               <div class="menu-items">
+                    <span onclick="alert('Credite selectate!')">credite</span>
+                    <span onclick="alert('Depozite selectate!')">depozite</span>
+                    <span onclick="alert('Carduri selectate!')">carduri</span>
+                    <span onclick="alert('Depozite selectate!')">depozite</span>
+                    <span onclick="alert('Obligațiuni selectate!')">obligațiuni</span>
+                    <span onclick="alert('Plăți și transferuri selectate!')">plăți și transferuri</span>
+                    <span onclick="alert('Curs valutar selectat!')">curs valutar</span>
+                    <span onclick="alert('Caritate selectată!')">caritate</span>
+                    <span onclick="alert('Mai multe selectate!')">mai multe</span>
+               </div>
+          </div>
+     </div>
 
-        <div class="main-content">
-            <div class="image-container">
-                <img src="~/Content/Images/Home/Poza_2_oameni_banner_top.png" alt="Placeholder Image">
-            </div>
-            <div class="text-container">
-                <span>Ia-ți cardul</span>
-                <span class="logo-italic">AMC bank</span>
-                <span>în câteva clipe!</span>
-            </div>
-            <div class="details-button" onclick="alert('Detalii deschise!')">detalii</div>
-        </div>
+     <!-- Conținutul adăugat -->
+     <div class="new-container">
+          <!-- Secțiunea 1 -->
+          <div class="new-section">
+               <h2>transfer de la card la card P2P</h2>
+               <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
+               <div class="new-button" onclick="alert('Transfer P2P inițiat!')">
+                    <div class="new-button-text">transferă acum</div>
+               </div>
+          </div>
 
-        <div class="support-button" onclick="alert('Suport deschis!')">suport</div>
-        <div style="width: 245px; left: 1622px; top: 923px; position: absolute">
-            <div style="width: 167px; height: 65px; left: 0px; top: 0px; position: absolute">
-                <div style="width: 167px; height: 65px; left: 0px; top: 0px; position: absolute; background: #163B3D; border-radius: 12px"></div>
-                <div style="width: 154px; height: 47px; left: 7px; top: 4px; position: absolute; color: white; font-size: 20px; font-family: Kantumruy Pro; font-weight: 400; word-wrap: break-word">Salut, cu ce <br />te putem ajuta?</div>
-            </div>
-            <div style="width: 63px; height: 63px; left: 182px; top: 0px; position: absolute">
-                <div style="width: 63px; height: 63px; left: 0px; top: 0px; position: absolute; background: #163B3D; border-radius: 9999px; border: 1px #C1E6E8 solid"></div>
-                <div style="width: 51px; height: 22px; left: 6px; top: 28px; position: absolute; text-align: center; color: #93D5E0; font-size: 15px; font-family: Kantumruy Pro; font-weight: 600; word-wrap: break-word">suport</div>
-                <div style="width: 59px; height: 14px; left: 2px; top: 14px; position: absolute; text-align: center; color: white; font-size: 15px; font-family: Kantumruy Pro; font-weight: 700; word-wrap: break-word">AMC<br /></div>
-            </div>
-        </div>
-        <div class="chat-button" onclick="alert('Chat deschis!')">Salut, cu ce te putem ajuta?</div>
-        <div class="menu">
-            <div class="menu-items">
-                <span onclick="alert('Credite selectate!')">credite</span>
-                <span onclick="alert('Depozite selectate!')">depozite</span>
-                <span onclick="alert('Carduri selectate!')">carduri</span>
-                <span onclick="alert('Depozite selectate!')">depozite</span>
-                <span onclick="alert('Obligațiuni selectate!')">obligațiuni</span>
-                <span onclick="alert('Plăți și transferuri selectate!')">plăți și transferuri</span>
-                <span onclick="alert('Curs valutar selectat!')">curs valutar</span>
-                <span onclick="alert('Caritate selectată!')">caritate</span>
-                <span onclick="alert('Mai multe selectate!')">mai multe</span>
-            </div>
-        </div>
-    </div>
+          <!-- Secțiunea 2 -->
+          <div class="new-section">
+               <h2>transfer internațional la card T2C</h2>
+               <p>primește bani din străinătate direct pe card, oricând și oriunde te-ai afla</p>
+               <div class="new-button" onclick="alert('Transfer internațional inițiat!')">
+                    <div class="new-button-text">transferă acum</div>
+               </div>
+          </div>
 
+          <!-- Secțiunea 3 -->
+          <div class="new-section">
+               <h2>transfer prin număr de telefon</h2>
+               <p>transferă bani prin număr de telefon pe un card din Republica Moldova sau din străinătate</p>
+               <div class="new-button" onclick="alert('Transfer prin număr de telefon inițiat!')">
+                    <div class="new-button-text">transferă acum</div>
+               </div>
+          </div>
 
-
-    <!-- Conținutul adăugat -->
-    <div class="new-container">
-        <!-- Secțiunea 1 -->
-        <div class="new-section">
-            <h2>transfer de la card la card P2P</h2>
-            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
-            <div class="new-button" onclick="alert('Transfer P2P inițiat!')">
-                <div class="new-button-text">transferă acum</div>
-            </div>
-        </div>
-
-        <!-- Secțiunea 2 -->
-        <div class="new-section">
-            <h2>transfer internațional la card T2C</h2>
-            <p>primește bani din străinătate direct pe card, oricând și oriunde te-ai afla</p>
-            <div class="new-button" onclick="alert('Transfer internațional inițiat!')">
-                <div class="new-button-text">transferă acum</div>
-            </div>
-        </div>
-
-        <!-- Secțiunea 3 -->
-        <div class="new-section">
-            <h2>transfer prin număr de telefon</h2>
-            <p>transferă bani prin număr de telefon pe un card din Republica Moldova sau din străinătate</p>
-            <div class="new-button" onclick="alert('Transfer prin număr de telefon inițiat!')">
-                <div class="new-button-text">transferă acum</div>
-            </div>
-        </div>
-
-        <!-- Secțiunea 4 -->
-        <div class="new-section">
-            <h2>ask for money</h2>
-            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
-            <div class="new-button" onclick="alert('Cerere de bani inițiată!')">
-                <div class="new-button-text">transferă acum</div>
-            </div>
-        </div>
-    </div>
+          <!-- Secțiunea 4 -->
+          <div class="new-section">
+               <h2>ask for money</h2>
+               <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
+               <div class="new-button" onclick="alert('Cerere de bani inițiată!')">
+                    <div class="new-button-text">transferă acum</div>
+               </div>
+          </div>
+     </div>
 </body>
 </html>

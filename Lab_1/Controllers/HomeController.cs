@@ -11,7 +11,17 @@ namespace Lab_1.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+               {
+                    //get all articles from the database
+                    var Main = new Main()ș
+                    var articles = new List<ArticlesData>();
+
+               }
+
+               {
+
+               }
+               return View();
         }
 
         
