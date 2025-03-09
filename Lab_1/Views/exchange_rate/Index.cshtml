@@ -3,170 +3,213 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Curs Valutar</title>
+     <title>Convertor Valutar</title>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <style>
           body {
                font-family: Arial, sans-serif;
+               background-color: #c6f2f9;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 100vh;
                margin: 0;
-               padding: 20px;
-               background-color: #f4f4f4;
           }
 
           .container {
-               max-width: 600px;
-               margin: 0 auto;
-               background: #fff;
+               background: #b0e4eb;
                padding: 20px;
-               border-radius: 8px;
-               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               border-radius: 10px;
+               width: 80%;
+               display: flex;
+               justify-content: space-between;
           }
 
-          h1 {
-               text-align: center;
-               color: #333;
+          .exchange-table {
+               width: 45%;
           }
 
           table {
                width: 100%;
                border-collapse: collapse;
-               margin-bottom: 20px;
-          }
-
-          table, th, td {
-               border: 1px solid #ddd;
           }
 
           th, td {
+               border-bottom: 1px solid #666;
                padding: 10px;
-               text-align: center;
-          }
-
-          th {
-               background-color: #f2f2f2;
+               text-align: left;
           }
 
           .converter {
-               display: flex;
-               justify-content: space-between;
-               align-items: center;
-               margin-bottom: 20px;
+               width: 45%;
+               background: #e6fcff;
+               padding: 20px;
+               border-radius: 10px;
           }
 
-               .converter input {
-                    width: 100px;
+          .currency-buttons {
+               display: flex;
+               flex-wrap: wrap;
+          }
+
+               .currency-buttons button {
+                    flex: 1;
                     padding: 10px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-               }
-
-               .converter button {
-                    padding: 10px 20px;
-                    background-color: #28a745;
-                    color: #fff;
-                    border: none;
-                    border-radius: 4px;
+                    border: 1px solid #666;
                     cursor: pointer;
+                    background: #e6fcff;
+                    margin: 5px;
                }
 
-                    .converter button:hover {
-                         background-color: #218838;
+                    .currency-buttons button.active {
+                         background: #00b894;
+                         color: white;
                     }
 
-          .chat {
+          .amount-box {
+               font-size: 24px;
+               font-weight: bold;
+               padding: 10px;
                text-align: center;
-               margin-top: 20px;
+               background: white;
+               border: 1px solid #666;
+               margin: 10px 0;
           }
 
-               .chat p {
-                    font-size: 18px;
-                    color: #333;
+               .amount-box input {
+                    width: 100%;
+                    font-size: 24px;
+                    text-align: center;
+                    border: none;
+                    outline: none;
                }
      </style>
 </head>
 <body>
+
      <div class="container">
-          <h1>Curs Valutar</h1>
-          <table>
-               <thead>
+          <div class="exchange-table">
+               <h2>Curs Valutar</h2>
+               <table>
                     <tr>
                          <th>Valuta</th>
                          <th>Cumpărare</th>
                          <th>Vânzare</th>
                     </tr>
-               </thead>
-               <tbody>
-                    <tr>
-                         <td>USD</td>
-                         <td>USD</td>
-                         <td>USD</td>
-                    </tr>
-                    <tr>
-                         <td>EUR</td>
-                         <td>EUR</td>
-                         <td>EUR</td>
-                    </tr>
-                    <tr>
-                         <td>RUB</td>
-                         <td>RUB</td>
-                         <td>RUB</td>
-                    </tr>
-                    <tr>
-                         <td>RON</td>
-                         <td>RON</td>
-                         <td>RON</td>
-                    </tr>
-                    <tr>
-                         <td>UAH</td>
-                         <td>UAH</td>
-                         <td>UAH</td>
-                    </tr>
-                    <tr>
-                         <td>GBP</td>
-                         <td>GBP</td>
-                         <td>GBP</td>
-                    </tr>
-               </tbody>
-          </table>
-          <div class="converter">
-               <div>
-                    <label for="amount">Pentru</label>
-                    <input type="number" id="amount" value="100.00">
-               </div>
-               <div>
-                    <label for="currency">Valuta</label>
-                    <select id="currency">
-                         <option>USD</option>
-                         <option>EUR</option>
-                         <option>RUB</option>
-                         <option>RON</option>
-                         <option>UAH</option>
-                         <option>GBP</option>
-                         <option>MOL</option>
-                    </select>
-               </div>
-               <button>Converteste</button>
+                    <tr><td>USD</td><td id="usd-buy"></td><td id="usd-sell"></td></tr>
+                    <tr><td>EUR</td><td id="eur-buy"></td><td id="eur-sell"></td></tr>
+                    <tr><td>RUB</td><td id="rub-buy"></td><td id="rub-sell"></td></tr>
+                    <tr><td>RON</td><td id="ron-buy"></td><td id="ron-sell"></td></tr>
+                    <tr><td>UAH</td><td id="uah-buy"></td><td id="uah-sell"></td></tr>
+                    <tr><td>GBP</td><td id="gbp-buy"></td><td id="gbp-sell"></td></tr>
+               </table>
           </div>
+
           <div class="converter">
-               <div>
-                    <label for="result">Vei primi</label>
-                    <input type="text" id="result" value="1860.00" readonly>
+               <h2>Convertor Valutar</h2>
+               <p>Pentru</p>
+               <div class="currency-buttons" id="fromCurrency">
+                    <button data-currency="USD" class="active">USD</button>
+                    <button data-currency="EUR">EUR</button>
+                    <button data-currency="RUB">RUB</button>
+                    <button data-currency="RON">RON</button>
+                    <button data-currency="UAH">UAH</button>
+                    <button data-currency="GBP">GBP</button>
+                    <button data-currency="MDL">MDL</button>
                </div>
-               <div>
-                    <label for="resultCurrency">Valuta</label>
-                    <select id="resultCurrency">
-                         <option>USD</option>
-                         <option>EUR</option>
-                         <option>RUB</option>
-                         <option>RON</option>
-                         <option>UAH</option>
-                         <option>GBP</option>
-                         <option>MOL</option>
-                    </select>
+               <div class="amount-box"><input type="number" id="amount" value="100" min="1" step="1"></div>
+
+               <p>Vei primi</p>
+               <div class="currency-buttons" id="toCurrency">
+                    <button data-currency="USD">USD</button>
+                    <button data-currency="EUR">EUR</button>
+                    <button data-currency="RUB">RUB</button>
+                    <button data-currency="RON">RON</button>
+                    <button data-currency="UAH">UAH</button>
+                    <button data-currency="GBP">GBP</button>
+                    <button data-currency="MDL" class="active">MDL</button>
                </div>
-          </div>
-          <div class="chat">
-               <p>Salut, cu ce te putem ajuta?</p>
+               <div class="amount-box"><input type="number" id="result" value="100" min="1" step="1" readonly></div>
           </div>
      </div>
+
+     <script>
+          $(document).ready(function () {
+               let fromCurrency = "USD";
+               let toCurrency = "MDL";
+               let exchangeRates = {};
+
+               // Funcție pentru a obține ratele de schimb
+               function fetchExchangeRates() {
+                    $.ajax({
+                         url: "https://api.exchangerate-api.com/v4/latest/USD", // Exemplu de API
+                         type: "GET",
+                         success: function (response) {
+                              exchangeRates = response.rates;
+                              updateExchangeTable();
+                         },
+                         error: function () {
+                              alert("Eroare la obținerea ratelor de schimb!");
+                         }
+                    });
+               }
+
+               // Funcție pentru a actualiza tabelul cu ratele de schimb
+               function updateExchangeTable() {
+                    $("#usd-buy").text(exchangeRates.USD.toFixed(4));
+                    $("#usd-sell").text(exchangeRates.USD.toFixed(4));
+                    $("#eur-buy").text(exchangeRates.EUR.toFixed(4));
+                    $("#eur-sell").text(exchangeRates.EUR.toFixed(4));
+                    $("#rub-buy").text(exchangeRates.RUB.toFixed(4));
+                    $("#rub-sell").text(exchangeRates.RUB.toFixed(4));
+                    $("#ron-buy").text(exchangeRates.RON.toFixed(4));
+                    $("#ron-sell").text(exchangeRates.RON.toFixed(4));
+                    $("#uah-buy").text(exchangeRates.UAH.toFixed(4));
+                    $("#uah-sell").text(exchangeRates.UAH.toFixed(4));
+                    $("#gbp-buy").text(exchangeRates.GBP.toFixed(4));
+                    $("#gbp-sell").text(exchangeRates.GBP.toFixed(4));
+               }
+
+               // Funcție pentru a converti valuta
+               function convertCurrency() {
+                    let amount = parseFloat($("#amount").val());
+
+                    if (isNaN(amount) || amount <= 0) {
+                         $("#result").val("0.00");
+                         return;
+                    }
+
+                    if (exchangeRates[fromCurrency] && exchangeRates[toCurrency]) {
+                         let convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
+                         $("#result").val(convertedAmount.toFixed(2));
+                    } else {
+                         alert("Rata de schimb nu este disponibilă pentru aceste valute!");
+                    }
+               }
+
+               // Evenimente pentru schimbarea valutei
+               $(".currency-buttons button").click(function () {
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+
+                    if ($(this).parent().attr("id") === "fromCurrency") {
+                         fromCurrency = $(this).data("currency");
+                    } else {
+                         toCurrency = $(this).data("currency");
+                    }
+
+                    convertCurrency();
+               });
+
+               // Eveniment pentru schimbarea sumei
+               $("#amount").on("input", function () {
+                    convertCurrency();
+               });
+
+               // Inițializare
+               fetchExchangeRates();
+          });
+     </script>
+
 </body>
 </html>
