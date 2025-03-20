@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NivelulBL.BusinessLogic.Core
 {
-    public class UserAPI
+    public class UserApi
     {
     }
 }
