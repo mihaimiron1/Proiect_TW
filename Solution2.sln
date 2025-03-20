@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_TW", "Lab_1\Project_TW.csproj", "{ACE1F3CC-A104-41AA-9A54-EEDDEFA6DA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NivelulDeReprezentare.Web", "NivelulDeReprezentare.Web\NivelulDeReprezentare.Web.csproj", "{5346390F-4AF1-40E6-96F2-5DCBA3785BAF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NivelulBL.BusinessLogic", "NivelulBL.BusinessLogic\NivelulBL.BusinessLogic.csproj", "{CDEFCAF1-0EE9-45AF-AB8C-9B73F245DF4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSet.Domains", "DataSet.Domains\DataSet.Domains.csproj", "{75BF978B-0BB6-40D7-9045-BED17AE4FC34}"
@@ -21,10 +19,6 @@ Global
 		{ACE1F3CC-A104-41AA-9A54-EEDDEFA6DA1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACE1F3CC-A104-41AA-9A54-EEDDEFA6DA1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACE1F3CC-A104-41AA-9A54-EEDDEFA6DA1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5346390F-4AF1-40E6-96F2-5DCBA3785BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5346390F-4AF1-40E6-96F2-5DCBA3785BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5346390F-4AF1-40E6-96F2-5DCBA3785BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5346390F-4AF1-40E6-96F2-5DCBA3785BAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CDEFCAF1-0EE9-45AF-AB8C-9B73F245DF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDEFCAF1-0EE9-45AF-AB8C-9B73F245DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDEFCAF1-0EE9-45AF-AB8C-9B73F245DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU

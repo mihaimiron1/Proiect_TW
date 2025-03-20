@@ -53,9 +53,9 @@
     <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NivelulDeReprezentare.Web\NivelulDeReprezentare.Web.csproj">
-      <Project>{5346390f-4af1-40e6-96f2-5dcba3785baf}</Project>
-      <Name>NivelulDeReprezentare.Web</Name>
+    <ProjectReference Include="..\Lab_1\Project_TW.csproj">
+      <Project>{ace1f3cc-a104-41aa-9a54-eeddefa6da1d}</Project>
+      <Name>Project_TW</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
