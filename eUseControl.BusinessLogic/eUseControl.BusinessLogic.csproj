@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3D8E3E96-B536-4C40-BFA7-C5FC4F67D22A}</ProjectGuid>
+    <ProjectGuid>{7EAF4BA6-C336-497F-9229-B38618BA92DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>eUseControl.BusinessLogic</RootNamespace>
     <AssemblyName>eUseControl.BusinessLogic</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -42,21 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BussinesLogic.cs" />
-    <Compile Include="SessionBL.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
-    <Compile Include="Interface\ISession.cs" />
+    <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eUserControl.Domain\eUserControl.Domain.csproj">
-      <Project>{aae3727f-b151-46c2-9f51-4bde2658bf47}</Project>
-      <Name>eUserControl.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUSerControl.Helpers\eUSerControl.Helpers.csproj">
-      <Project>{169f2d7b-c115-4950-8cbb-bc9e738cbbf9}</Project>
-      <Name>eUSerControl.Helpers</Name>
-    </ProjectReference>
+    <Compile Include="SessionBL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

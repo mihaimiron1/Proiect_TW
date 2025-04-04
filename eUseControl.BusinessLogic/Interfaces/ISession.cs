@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eUSerControl.Helpers
+namespace eUseControl.Domain
 {
-    public class Class1
+    public interface ISession
     {
     }
 }

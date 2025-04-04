@@ -1,14 +1,12 @@
-﻿using eUseControl.BusinessLogic.Core;
-using eUseControl.BusinessLogic.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eUseControl.BusinessLogic
+namespace eUseControl.Domain
 {
-    public class SessionBL: UserApi, ISession
+    public class SessionBL : UserApi, ISession
     {
     }
 }

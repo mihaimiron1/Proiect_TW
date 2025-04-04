@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("eUSerControl.Helpers")]
+[assembly: AssemblyTitle("uUseControl.Domain")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("eUSerControl.Helpers")]
+[assembly: AssemblyProduct("uUseControl.Domain")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("169f2d7b-c115-4950-8cbb-bc9e738cbbf9")]
+[assembly: Guid("437fd447-44de-4893-ae7a-286647da4db7")]
 
 // Version information for an assembly consists of the following four values:
 //

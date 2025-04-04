@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eUserControl.Domain.Entities.User
+namespace eUseControl.Domain
 {
     public class ULoginData
     {
         public string Credential { get; set; }
         public string Password { get; set; }
-        public string LoginDateTIme { get; set; }
+        public string LoginIp{ get; set; }
         public DateTime LoginDateTime { get; set; }
+
     }
 }
