@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.BusinessLogic",
 		{437FD447-44DE-4893-AE7A-286647DA4DB7} = {437FD447-44DE-4893-AE7A-286647DA4DB7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "uUseControl.Domain\eUseControl.Domain.csproj", "{437FD447-44DE-4893-AE7A-286647DA4DB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseControl.Domain\eUseControl.Domain.csproj", "{437FD447-44DE-4893-AE7A-286647DA4DB7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{27D55080-861B-48FA-B648-A3FAAB76B891} = {27D55080-861B-48FA-B648-A3FAAB76B891}
 	EndProjectSection
