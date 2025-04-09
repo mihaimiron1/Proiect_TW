@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace Lab_1
+namespace eUseControl.Web
 {
     public class FilterConfig
     {
