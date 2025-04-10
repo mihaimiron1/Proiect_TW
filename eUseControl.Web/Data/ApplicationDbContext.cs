@@ -112,11 +112,6 @@ namespace eUseControl.Web.Data
                     .HasMaxLength(45)
                     .IsOptional();
 
-                modelBuilder.Entity<LoginRecord>()
-                    .Property(l => l.UserAgent)
-                    .HasMaxLength(500)
-                    .IsOptional();
-
                 base.OnModelCreating(modelBuilder);
             }
             catch (Exception ex)

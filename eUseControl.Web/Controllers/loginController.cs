@@ -90,7 +90,6 @@ namespace eUseControl.Web.Controllers
                         Email = email,
                         LoginTime = DateTime.Now,
                         IPAddress = GetClientIPAddress(),
-                        UserAgent = Request.UserAgent ?? "Unknown",
                         Success = false
                     };
 
