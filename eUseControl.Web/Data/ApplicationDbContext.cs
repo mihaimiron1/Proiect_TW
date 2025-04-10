@@ -76,10 +76,6 @@ namespace eUseControl.Web.Data
                 .HasMaxLength(20);
 
             modelBuilder.Entity<User>()
-                .Property(u => u.Address)
-                .HasMaxLength(200);
-
-            modelBuilder.Entity<User>()
                 .Property(u => u.City)
                 .HasMaxLength(100);
 

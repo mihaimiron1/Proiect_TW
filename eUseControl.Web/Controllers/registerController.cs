@@ -32,17 +32,23 @@ namespace eUseControl.Web.Controllers
                 if (!_context.Database.Exists())
                 {
                     _context.Database.Create();
+                    Debug.WriteLine("Database created successfully");
                 }
 
                 // Try to access users to verify database is working
                 var users = _context.Users.ToList();
                 
-                // Add statistics
+                // Enhanced statistics
+                var now = DateTime.Now;
                 ViewBag.TotalUsers = users.Count;
                 ViewBag.NewUsersToday = users.Count(u => u.CreatedAt.Date == DateTime.Today);
+                ViewBag.UsersThisWeek = users.Count(u => u.CreatedAt >= now.AddDays(-7));
+                ViewBag.UsersThisMonth = users.Count(u => u.CreatedAt >= now.AddMonths(-1));
                 ViewBag.DatabaseName = _context.Database.Connection.Database;
-                ViewBag.LastUpdated = DateTime.Now;
+                ViewBag.LastUpdated = now;
+                ViewBag.MostRecentUser = users.OrderByDescending(u => u.CreatedAt).FirstOrDefault()?.Name ?? "None";
 
+                Debug.WriteLine($"Successfully retrieved {users.Count} users from database");
                 return View(users);
             }
             catch (Exception ex)
@@ -56,7 +62,13 @@ namespace eUseControl.Web.Controllers
                     Debug.WriteLine($"Inner stack trace: {ex.InnerException.StackTrace}");
                 }
 
+                var errorMessage = ex.InnerException != null 
+                    ? $"Database error: {ex.Message}. Details: {ex.InnerException.Message}"
+                    : $"Database error: {ex.Message}";
+
                 ViewBag.ErrorMessage = "An error occurred while accessing the database. Please try again later.";
+                ViewBag.DetailedError = errorMessage;
+                ViewBag.LastUpdated = DateTime.Now;
                 return View(new List<User>());
             }
         }

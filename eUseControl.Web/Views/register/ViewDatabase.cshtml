@@ -50,7 +50,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
-                            <th>Address</th>
                             <th>City</th>
                             <th>Country</th>
                             <th>Registration Date</th>
@@ -66,7 +65,6 @@
                                     <td>@user.Name</td>
                                     <td>@user.Email</td>
                                     <td>@(string.IsNullOrEmpty(user.PhoneNumber) ? "-" : user.PhoneNumber)</td>
-                                    <td>@(string.IsNullOrEmpty(user.Address) ? "-" : user.Address)</td>
                                     <td>@(string.IsNullOrEmpty(user.City) ? "-" : user.City)</td>
                                     <td>@(string.IsNullOrEmpty(user.Country) ? "-" : user.Country)</td>
                                     <td>@user.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>

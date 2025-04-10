@@ -33,10 +33,6 @@ namespace eUseControl.Web.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [StringLength(200, ErrorMessage = "Address cannot exceed 200 characters")]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
-
         [StringLength(100, ErrorMessage = "City cannot exceed 100 characters")]
         [Display(Name = "City")]
         public string City { get; set; }
