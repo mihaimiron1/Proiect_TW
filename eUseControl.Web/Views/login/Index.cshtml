@@ -1,183 +1,71 @@
-﻿
-@{
-    ViewBag.Title = "login";
-    Layout = null;
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Login</h2>
+                </div>
+                <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary(false)
+                        </div>
+                    }
 
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-info">
+                            @TempData["Message"]
+                        </div>
+                    }
 
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMC Bank - Logare</title>
-    <style>
-        /* Resetare stiluri */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-        /* Fundal general */
-        body {
-            background: linear-gradient(180deg, #ffffff 50%, #0C9CA7 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required 
+                                   placeholder="Enter your email">
+                            @Html.ValidationMessage("email", new { @class = "text-danger" })
+                        </div>
 
-        /* Container principal */
-        .login-container {
-            width: 400px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            text-align: center;
-        }
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required 
+                                   placeholder="Enter your password">
+                            @Html.ValidationMessage("password", new { @class = "text-danger" })
+                        </div>
 
-        /* Logo */
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #163B3D;
-            margin-bottom: 1.5rem;
-        }
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    }
 
-        .logo-italic {
-            font-style: italic;
-        }
-
-        /* Formular */
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-            .input-group input {
-                width: 100%;
-                padding: 12px 15px;
-                border: 2px solid #1E4445;
-                border-radius: 8px;
-                font-size: 1rem;
-                color: #163B3D;
-                outline: none;
-                transition: border-color 0.3s;
-            }
-
-                .input-group input:focus {
-                    border-color: #0B9CA6;
-                }
-
-            .input-group label {
-                position: absolute;
-                left: 15px;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #6D9C9A;
-                background: white;
-                padding: 0 5px;
-                font-size: 0.9rem;
-                transition: all 0.3s;
-            }
-
-            .input-group input:focus + label,
-            .input-group input:not(:placeholder-shown) + label {
-                top: 0;
-                font-size: 0.8rem;
-                color: #0B9CA6;
-            }
-
-        /* Buton de logare */
-        .login-btn {
-            background: #0B9CA6;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-            .login-btn:hover {
-                background: #1E4445;
-            }
-
-        /* Link-uri suplimentare */
-        .links {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-        }
-
-            .links a {
-                color: #0B9CA6;
-                text-decoration: none;
-                transition: color 0.3s;
-            }
-
-                .links a:hover {
-                    color: #1E4445;
-                }
-
-        /* Mesaj de bun venit */
-        .welcome-message {
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #6D9C9A;
-        }
-
-            .welcome-message a {
-                color: #0B9CA6;
-                text-decoration: none;
-                font-weight: bold;
-            }
-
-                .welcome-message a:hover {
-                    text-decoration: underline;
-                }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <!-- Logo -->
-        <div class="logo">
-            <span>AMC</span>
-            <span class="logo-italic">bank</span>
-        </div>
-
-        <!-- Formular de logare -->
-        <form class="login-form">
-            <div class="input-group">
-                <input type="text" id="username" placeholder=" " required>
-                <label for="username">Nume utilizator</label>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="@Url.Action("Index", "Register")">Register here</a></p>
+                    </div>
+                </div>
             </div>
-
-            <div class="input-group">
-                <input type="password" id="password" placeholder=" " required>
-                <label for="password">Parolă</label>
-            </div>
-
-            <button type="submit" class="login-btn">Loghează-te</button>
-        </form>
-
-        <!-- Link-uri suplimentare -->
-        <div class="links">
-            <a href="#">Ai uitat parola?</a>
-            <a href="/register/Index">Înregistrare</a>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Auto-hide alerts after 5 seconds
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 5000);
+        });
+    </script>
+}

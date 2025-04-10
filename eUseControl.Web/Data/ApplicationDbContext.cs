@@ -6,89 +6,124 @@ using System.Text;
 using eUseControl.Web.Models;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 
 namespace eUseControl.Web.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        static ApplicationDbContext()
-        {
-            // Create database if it doesn't exist and enable automatic migrations
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
-        }
-
         public ApplicationDbContext() : base("DefaultConnection")
         {
-            // Enable lazy loading
-            this.Configuration.LazyLoadingEnabled = true;
+            // Enable detailed error messages
+            Database.Log = s => Debug.WriteLine(s);
+            
+            // Disable lazy loading for better control
+            Configuration.LazyLoadingEnabled = false;
             
             // Enable automatic detection of changes
-            this.Configuration.AutoDetectChangesEnabled = true;
-
-            // Disable proxy creation for better performance when not needed
-            this.Configuration.ProxyCreationEnabled = false;
-
-            // This will create the database if it doesn't exist
-            Database.CreateIfNotExists();
+            Configuration.AutoDetectChangesEnabled = true;
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<LoginRecord> LoginRecords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            
-            // Configure User table
-            modelBuilder.Entity<User>()
-                .ToTable("Users"); // Explicitly set table name
+            try
+            {
+                modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+                
+                // Configure User table
+                modelBuilder.Entity<User>()
+                    .ToTable("Users")
+                    .HasKey(u => u.Id);
 
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Id)
+                    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Email)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(100);
+                // Create unique index for email
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Email)
+                    .HasColumnAnnotation(
+                        "Index",
+                        new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
-            // Create unique index for email
-            modelBuilder.Entity<User>()
-                .Property(u => u.Email)
-                .HasColumnAnnotation(
-                    "Index",
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Password)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.Password)
-                .IsRequired()
-                .HasMaxLength(100);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.Name)
-                .IsRequired()
-                .HasMaxLength(100);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.PhoneNumber)
+                    .HasMaxLength(20)
+                    .IsOptional();
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.PhoneNumber)
-                .HasMaxLength(20);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.City)
+                    .HasMaxLength(100)
+                    .IsOptional();
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.City)
-                .HasMaxLength(100);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.Country)
+                    .HasMaxLength(100)
+                    .IsOptional();
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.Country)
-                .HasMaxLength(100);
+                modelBuilder.Entity<User>()
+                    .Property(u => u.CreatedAt)
+                    .IsRequired()
+                    .HasColumnType("datetime2");
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.CreatedAt)
-                .IsRequired()
-                .HasColumnType("datetime2");
+                // Configure LoginRecord table
+                modelBuilder.Entity<LoginRecord>()
+                    .ToTable("LoginRecords")
+                    .HasKey(l => l.Id);
 
-            base.OnModelCreating(modelBuilder);
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.Id)
+                    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.Email)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.LoginTime)
+                    .IsRequired()
+                    .HasColumnType("datetime2");
+
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.Success)
+                    .IsRequired();
+
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.IPAddress)
+                    .HasMaxLength(50)
+                    .IsOptional();
+
+                modelBuilder.Entity<LoginRecord>()
+                    .Property(l => l.UserAgent)
+                    .HasMaxLength(500)
+                    .IsOptional();
+
+                base.OnModelCreating(modelBuilder);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in OnModelCreating: {ex.Message}");
+                throw new Exception("Failed to create database model. See inner exception for details.", ex);
+            }
         }
 
         public override int SaveChanges()
@@ -104,10 +139,17 @@ namespace eUseControl.Web.Data
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        errorMessages.AppendLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                        var message = $"Entity: {validationErrors.Entry.Entity.GetType().Name} Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
+                        Debug.WriteLine(message);
+                        errorMessages.AppendLine(message);
                     }
                 }
-                throw new Exception(errorMessages.ToString(), ex);
+                throw new Exception($"Validation failed: {errorMessages}", ex);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in SaveChanges: {ex.Message}");
+                throw new Exception("Failed to save changes to database. See inner exception for details.", ex);
             }
         }
     }
