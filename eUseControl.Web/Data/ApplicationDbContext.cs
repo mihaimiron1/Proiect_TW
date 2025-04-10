@@ -109,7 +109,7 @@ namespace eUseControl.Web.Data
 
                 modelBuilder.Entity<LoginRecord>()
                     .Property(l => l.IPAddress)
-                    .HasMaxLength(50)
+                    .HasMaxLength(45)
                     .IsOptional();
 
                 modelBuilder.Entity<LoginRecord>()

@@ -5,6 +5,7 @@ using eUseControl.Web.Models;
 using eUseControl.Web.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
+using System.Net;
 
 namespace eUseControl.Web.Controllers
 {
@@ -16,6 +17,39 @@ namespace eUseControl.Web.Controllers
         public LoginController()
         {
             _context = new ApplicationDbContext();
+        }
+
+        private string GetClientIPAddress()
+        {
+            string ipAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            }
+            
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = Request.UserHostAddress;
+            }
+            
+            // If still empty or localhost, try to get the actual IP
+            if (string.IsNullOrEmpty(ipAddress) || ipAddress == "::1" || ipAddress == "127.0.0.1")
+            {
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        ipAddress = client.DownloadString("https://api.ipify.org");
+                    }
+                }
+                catch
+                {
+                    ipAddress = "Unknown";
+                }
+            }
+
+            return ipAddress;
         }
 
         // GET: Login
@@ -55,7 +89,7 @@ namespace eUseControl.Web.Controllers
                     {
                         Email = email,
                         LoginTime = DateTime.Now,
-                        IPAddress = Request.UserHostAddress ?? "Unknown",
+                        IPAddress = GetClientIPAddress(),
                         UserAgent = Request.UserAgent ?? "Unknown",
                         Success = false
                     };

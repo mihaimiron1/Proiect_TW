@@ -48,7 +48,6 @@
                                 <th>Login Time</th>
                                 <th>Status</th>
                                 <th>IP Address</th>
-                                <th>User Agent</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,8 +67,16 @@
                                             <span class="badge bg-danger">Failed</span>
                                         }
                                     </td>
-                                    <td>@(string.IsNullOrEmpty(record.IPAddress) ? "-" : record.IPAddress)</td>
-                                    <td>@(string.IsNullOrEmpty(record.UserAgent) ? "-" : record.UserAgent)</td>
+                                    <td>
+                                        @if (string.IsNullOrEmpty(record.IPAddress))
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="font-monospace">@record.IPAddress</span>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
