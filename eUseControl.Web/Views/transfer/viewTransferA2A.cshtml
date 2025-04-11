@@ -1,35 +1,99 @@
 @model IEnumerable<eUseControl.Web.Models.TransferCard>
 
 @{
+    Layout = null;
     ViewBag.Title = "A2A Transfer History";
 }
 
-<h2>A2A Transfer History</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Bank Sender</th>
-            <th>Card Sender</th>
-            <th>Amount</th>
-            <th>Card Beneficiary</th>
-            <th>Bank Beneficiary</th>
-            <th>Transfer Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var transfer in Model)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
         {
-            <tr>
-                <td>@transfer.Id</td>
-                <td>@transfer.BankSender</td>
-                <td>@transfer.CardSender</td>
-                <td>@transfer.Amount.ToString("C")</td>
-                <td>@transfer.CardBeneficiary</td>
-                <td>@transfer.BankBeneficiary</td>
-                <td>@transfer.TransferDate.ToString("g")</td>
-            </tr>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">@ViewBag.ErrorMessage</h4>
+                @if (!string.IsNullOrEmpty(ViewBag.DetailedError))
+                {
+                    <hr>
+                    <p class="mb-0"><small>Technical details: @ViewBag.DetailedError</small></p>
+                }
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         }
-    </tbody>
-</table> 
+
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">A2A Transfer History</h5>
+            </div>
+            <div class="card-body">
+                @if (Model == null || !Model.Any())
+                {
+                    <div class="alert alert-info">
+                        <h5>No transfer records found</h5>
+                        <p>There are no A2A transfers recorded in the database yet. Records will appear here after transfers are made.</p>
+                        <hr>
+                        <p class="mb-0">
+                            <a href="@Url.Action("a2a", "transfer")" class="btn btn-primary">
+                                <i class="fas fa-exchange-alt"></i> Go to A2A Transfer
+                            </a>
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Bank Sender</th>
+                                    <th>Card Sender</th>
+                                    <th>Amount</th>
+                                    <th>Card Beneficiary</th>
+                                    <th>Bank Beneficiary</th>
+                                    <th>Transfer Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var transfer in Model)
+                                {
+                                    <tr>
+                                        <td>@transfer.Id</td>
+                                        <td>@transfer.BankSender</td>
+                                        <td>@transfer.CardSender</td>
+                                        <td>@transfer.Amount.ToString("C")</td>
+                                        <td>@transfer.CardBeneficiary</td>
+                                        <td>@transfer.BankBeneficiary</td>
+                                        <td>@transfer.TransferDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="@Url.Action("a2a", "transfer")" class="btn btn-success">
+                        <i class="fas fa-exchange-alt"></i> New Transfer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
