@@ -232,6 +232,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -291,6 +292,8 @@
     <Content Include="Views\register\ViewDatabase.cshtml" />
     <Content Include="Views\login\ViewLoginHistory.cshtml" />
     <Content Include="Views\transfer\viewTransferA2A.cshtml" />
+    <Content Include="Views\Shared\_DatabaseLayout.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

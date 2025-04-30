@@ -17,6 +17,22 @@ namespace Lab_1.Controllers
             _transferCardService = new TransferCardService();
         }
 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            if (Session["UserId"] == null)
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new System.Web.Routing.RouteValueDictionary
+                    {
+                        { "controller", "Login" },
+                        { "action", "Index" },
+                        { "returnUrl", filterContext.HttpContext.Request.RawUrl }
+                    });
+            }
+        }
+
         // GET: transfer
         public ActionResult a2a()
         {

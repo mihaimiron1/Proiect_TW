@@ -45,5 +45,7 @@ namespace eUseControl.Web.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Registration Date")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public string Role { get; set; }
     }
 } 
