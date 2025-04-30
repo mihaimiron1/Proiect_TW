@@ -1,226 +1,126 @@
 ﻿@{
     ViewBag.Title = "Despre noi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMC Bank - Despre noi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Stiluri generale */
-        .amc-about {
-            padding: 4rem 0;
-            background: #f8f9fa;
-        }
+<style>
+    /* Stiluri specifice pentru pagina Despre noi */
+    .amc-about {
+        padding: 4rem 0;
+        background: #f8f9fa;
+    }
 
-        .amc-mission {
-            background: linear-gradient(45deg, #163B3D, #0B9CA6);
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
+    .amc-mission {
+        background: linear-gradient(45deg, #163B3D, #0B9CA6);
+        color: white;
+        padding: 3rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+    }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
 
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .network-badge {
-            background: #05FFB9;
-            color: #163B3D;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 0.5rem;
-        }
+    .network-badge {
+        background: #05FFB9;
+        color: #163B3D;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        display: inline-block;
+        margin: 0.5rem;
+    }
+</style>
 
-        /* Navbar */
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-left: 20px;
-        }
-
-        .logo-italic {
-            font-style: italic;
-        }
-
-        .button-custom {
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .network-button {
-            background: #0B9CA6;
-            color: white;
-        }
-
-        .login-button {
-            background: #05FFB9;
-            color: #163B3D;
-        }
-
-        /* Meniu corectat */
-        .menu-custom {
-            border-top: 2px solid #dee2e6 !important;
-            background: #f8f9fa;
-            padding: 12px 0;
-        }
-
-        .menu-item {
-            color: #163B3D !important;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none !important;
-            white-space: nowrap;
-        }
-
-            .menu-item:hover {
-                background: #f1f3f5;
-                border-radius: 6px;
-                color: #0B9CA6 !important;
-                transform: translateY(-1px);
-            }
-    </style>
-</head>
-<body>
-
-    <!-- Navbar -->
-    <nav class="d-flex justify-content-between align-items-center py-3 bg-white">
-        <div class="logo">
-            <span>AMC</span>
-            <span class="logo-italic">bank</span>
+<div class="amc-about">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-4">Bine ai venit la AMC</h1>
+            <p class="lead">Suntem partenerul tău în fiecare pas important al vieții tale financiare</p>
         </div>
 
-        <div class="d-flex align-items-center me-4">
-            <div class="button-custom network-button me-3" onclick="alert('Despre noi!')">Despre noi</div>
-            <div class="button-custom login-button me-3" onclick="alert('Logare!')">Logare</div>
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" onclick="alert('Căutare!')" style="cursor: pointer">
-                <path d="M24 24L16.5 16.5M1 10C1 14.9706 5.02944 19 10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10Z"
-                      stroke="#455B5D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+        <div class="amc-mission">
+            <h2 class="mb-4">Misiunea noastră</h2>
+            <p>De 30 de ani, AMC sprijinim comunitatea prin soluții bancare inovatoare. Ne mândrim că suntem:</p>
+            <ul>
+                <li>Prima bancă din Moldova cu aplicație mobilă dedicată</li>
+                <li>Singura bancă cu program de mentoring pentru antreprenori</li>
+                <li>Pionier în bankingul sustenabil</li>
+            </ul>
         </div>
-    </nav>
 
-    <!-- Conținut principal -->
-    <div class="amc-about">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h1 class="display-4 mb-4">Bine ai venit la AMC</h1>
-                <p class="lead">Suntem partenerul tău în fiecare pas important al vieții tale financiare</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>950.000+</h3>
+                <p>Clienți activi</p>
             </div>
-
-            <div class="amc-mission">
-                <h2 class="mb-4">Misiunea noastră</h2>
-                <p>De 30 de ani, AMC sprijinim comunitatea prin soluții bancare inovatoare. Ne mândrim că suntem:</p>
-                <ul>
-                    <li>Prima bancă din Moldova cu aplicație mobilă dedicată</li>
-                    <li>Singura bancă cu program de mentoring pentru antreprenori</li>
-                    <li>Pionier în bankingul sustenabil</li>
-                </ul>
+            <div class="stat-card">
+                <h3>68</h3>
+                <p>Sucursale în țară</p>
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>950.000+</h3>
-                    <p>Clienți activi</p>
-                </div>
-                <div class="stat-card">
-                    <h3>68</h3>
-                    <p>Sucursale în țară</p>
-                </div>
-                <div class="stat-card">
-                    <h3>1.200+</h3>
-                    <p>Angajați dedicați</p>
-                </div>
-                <div class="stat-card">
-                    <h3>98%</h3>
-                    <p>Satisfacție client</p>
-                </div>
+            <div class="stat-card">
+                <h3>1.200+</h3>
+                <p>Angajați dedicați</p>
             </div>
-
-            <div class="mt-5">
-                <h2 class="text-center mb-4">Prezența noastră</h2>
-                <div class="text-center">
-                    <span class="network-badge">54 Sucursale</span>
-                    <span class="network-badge">420 ATM-uri</span>
-                    <span class="network-badge">18.000+ POS-uri</span>
-                    <span class="network-badge">45 Agenții</span>
-                </div>
+            <div class="stat-card">
+                <h3>98%</h3>
+                <p>Satisfacție client</p>
             </div>
+        </div>
 
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h2>De ce AMC?</h2>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="p-3">
-                                <h4>✓ Tehnologie Avansată</h4>
-                                <p>Platforme digitale securizate și inovatoare</p>
-                            </div>
+        <div class="mt-5">
+            <h2 class="text-center mb-4">Prezența noastră</h2>
+            <div class="text-center">
+                <span class="network-badge">54 Sucursale</span>
+                <span class="network-badge">420 ATM-uri</span>
+                <span class="network-badge">18.000+ POS-uri</span>
+                <span class="network-badge">45 Agenții</span>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2>De ce AMC?</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <h4>✓ Tehnologie Avansată</h4>
+                            <p>Platforme digitale securizate și inovatoare</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-3">
-                                <h4>✓ Asistență 24/7</h4>
-                                <p>Suport non-stop prin chat și call-center</p>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <h4>✓ Asistență 24/7</h4>
+                            <p>Suport non-stop prin chat și call-center</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-3">
-                                <h4>✓ Transparență</h4>
-                                <p>Comisioane și taxe clare, fără costuri ascunse</p>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <h4>✓ Transparență</h4>
+                            <p>Comisioane și taxe clare, fără costuri ascunse</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="mt-5 text-center">
-                <h3>AMC Verde</h3>
-                <p>Am plantat peste 50.000 de copaci în ultimii 3 ani</p>
-                <div class="progress" style="height: 25px">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 85%">85% Energie Verde</div>
-                </div>
+        <div class="mt-5 text-center">
+            <h3>AMC Verde</h3>
+            <p>Am plantat peste 50.000 de copaci în ultimii 3 ani</p>
+            <div class="progress" style="height: 25px">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 85%">85% Energie Verde</div>
             </div>
         </div>
     </div>
-
-    <!-- Meniu corectat -->
-    <div class="menu-custom">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center py-2" style="max-width: 1200px; margin: 0 auto">
-                <div class="d-flex flex-wrap gap-4">
-                    <span class="menu-item" onclick="alert('Credite selectate!')">credite</span>
-                    <span class="menu-item" onclick="alert('Depozite selectate!')">depozite</span>
-                    <span class="menu-item" onclick="alert('Carduri selectate!')">carduri</span>
-                    <span class="menu-item" onclick="alert('Obligațiuni selectate!')">obligațiuni</span>
-                    <span class="menu-item" onclick="alert('Plăți și transferuri selectate!')">plăți și transferuri</span>
-                    <span class="menu-item" onclick="alert('Curs valutar selectat!')">curs valutar</span>
-                    <span class="menu-item" onclick="alert('Caritate selectată!')">caritate</span>
-                    <span class="menu-item" onclick="alert('Mai multe selectate!')">mai multe</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+</div>

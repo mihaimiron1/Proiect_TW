@@ -38,6 +38,13 @@
             font-size: 3rem;
             font-weight: 700;
             color: var(--primary-dark);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            text-decoration: none;
+            color: var(--primary-dark);
         }
 
         .logo-italic {
@@ -80,6 +87,16 @@
         .menu-items li {
             cursor: pointer;
             padding: 0 10px;
+        }
+
+        .menu-items a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-items a:hover {
+            color: var(--primary-light);
+            text-decoration: none;
         }
 
         /* Main Content */
@@ -203,27 +220,25 @@
 <body>
     <!-- Header -->
     <div class="amc-header">
-        <div class="logo">
+        <a href="@Url.Action("Index", "Home")" class="logo">
             <span>AMC</span>
             <span class="logo-italic">bank</span>
-        </div>
+        </a>
         <div class="header-buttons">
-            <button class="header-button">Despre noi</button>
-            <button class="header-button">Logare</button>
+            <a href="@Url.Action("aboutus", "AMC")" class="header-button">Despre noi</a>
+            <a href="@Url.Action("Index", "Login")" class="header-button">Logare</a>
         </div>
     </div>
 
     <!-- Menu -->
     <div class="amc-menu">
         <ul class="menu-items">
-            <li>credite</li>
-            <li>depozite</li>
-            <li>carduri</li>
-            <li>obligațiuni</li>
-            <li>plăți și transferuri</li>
-            <li>curs valutar</li>
-            <li>caritate</li>
-            <li>mai multe</li>
+            <li><a href="#">credite</a></li>
+            <li><a href="#">depozite</a></li>
+            <li><a href="#">carduri</a></li>
+            <li><a href="#">obligațiuni</a></li>
+            <li><a href="@Url.Action("Index", "transfer")">transferuri</a></li>
+            <li><a href="#">curs valutar</a></li>            
         </ul>
     </div>
 

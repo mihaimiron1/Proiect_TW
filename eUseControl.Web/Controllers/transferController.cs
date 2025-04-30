@@ -17,34 +17,62 @@ namespace Lab_1.Controllers
             _transferCardService = new TransferCardService();
         }
 
+        private bool IsUserAuthenticated()
+        {
+            return Session["UserId"] != null;
+        }
+
+        private ActionResult RedirectToLogin()
+        {
+            return new RedirectToRouteResult(
+                new System.Web.Routing.RouteValueDictionary
+                {
+                    { "controller", "Login" },
+                    { "action", "Index" },
+                    { "returnUrl", Request.RawUrl }
+                });
+        }
+
         // GET: transfer
+        public ActionResult Index()
+        {
+            // Allow viewing the index page without authentication
+            ViewBag.IsAuthenticated = IsUserAuthenticated();
+            return View();
+        }
+
         public ActionResult a2a()
         {
+            if (!IsUserAuthenticated())
+                return RedirectToLogin();
             return View();
         }
 
         public ActionResult p2p()
         {
-            return View();
-        }
-
-        public ActionResult Index()
-        {
+            if (!IsUserAuthenticated())
+                return RedirectToLogin();
             return View();
         }
 
         public ActionResult afm()
         {
+            if (!IsUserAuthenticated())
+                return RedirectToLogin();
             return View();
         }
 
         public ActionResult t2c()
         {
+            if (!IsUserAuthenticated())
+                return RedirectToLogin();
             return View();
         }
 
         public ActionResult ViewTransferA2A()
         {
+            if (!IsUserAuthenticated())
+                return RedirectToLogin();
             var transfers = _transferCardService.GetAllTransfers();
             return View(transfers);
         }
@@ -53,6 +81,9 @@ namespace Lab_1.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult CreateA2ATransfer(TransferCard transfer)
         {
+            if (!IsUserAuthenticated())
+                return Json(new { success = false, error = "Authentication required" });
+
             try
             {
                 if (ModelState.IsValid)

@@ -17,6 +17,39 @@ namespace eUseControl.Web.Controllers
         public LoginController()
         {
             _context = new ApplicationDbContext();
+            EnsureAdminExists();
+        }
+
+        private void EnsureAdminExists()
+        {
+            try
+            {
+                if (!_context.Database.Exists())
+                {
+                    _context.Database.Create();
+                }
+
+                // Check if admin exists
+                var adminUser = _context.Users.FirstOrDefault(u => u.Email == "admin@admin");
+                if (adminUser == null)
+                {
+                    // Create admin user
+                    adminUser = new User
+                    {
+                        Email = "admin@admin",
+                        Password = "admin1",
+                        Name = "Administrator",
+                        Role = "Admin",
+                        CreatedAt = DateTime.Now
+                    };
+                    _context.Users.Add(adminUser);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error ensuring admin exists: " + ex.ToString());
+            }
         }
 
         private string GetClientIPAddress()
@@ -95,16 +128,16 @@ namespace eUseControl.Web.Controllers
 
                     if (user == null)
                     {
-                        // User doesn't exist - redirect to register
-                        TempData["Message"] = "User not found. Please register first.";
+                        // User doesn't exist - show error message but stay on login page
+                        ModelState.AddModelError("", "User not found.");
                         _context.LoginRecords.Add(loginRecord);
                         _context.SaveChanges();
-                        return RedirectToAction("Index", "Register");
+                        return View();
                     }
 
                     if (user.Password != password) // Note: In production, use proper password hashing
                     {
-                        ModelState.AddModelError("", "Invalid password.");
+                        ModelState.AddModelError("", "Password incorrect.");
                         _context.LoginRecords.Add(loginRecord);
                         _context.SaveChanges();
                         return View();
@@ -119,6 +152,20 @@ namespace eUseControl.Web.Controllers
                     Session["UserId"] = user.Id;
                     Session["UserEmail"] = user.Email;
                     Session["UserName"] = user.Name;
+                    Session["UserRole"] = user.Role;
+                    
+                    // If user is admin, redirect to admin dashboard
+                    if (user.Role == "Admin")
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
+                    
+                    // Check if there's a return URL for non-admin users
+                    string returnUrl = Request.QueryString["returnUrl"];
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
                     
                     return RedirectToAction("Index", "Home");
                 }
@@ -140,6 +187,12 @@ namespace eUseControl.Web.Controllers
         // GET: Login/ViewLoginHistory
         public ActionResult ViewLoginHistory()
         {
+            // Check if user is admin
+            if (Session["UserRole"]?.ToString() != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             try
             {
                 // Ensure database exists

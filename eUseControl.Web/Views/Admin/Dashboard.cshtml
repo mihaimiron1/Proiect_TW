@@ -1,0 +1,69 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 15px;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Admin Dashboard</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("ViewLoginHistory", "Login")" class="btn btn-primary btn-custom">
+                    Login History
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("ViewDatabase", "Register")" class="btn btn-success btn-custom">
+                    Registration History
+                </a>
+            </div>
+        </div>
+
+        <div class="back-button">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+        </div>
+
+        <div class="text-right mt-3">
+            <small class="text-muted">Last updated: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</small>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html> 

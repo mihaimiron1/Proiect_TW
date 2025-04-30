@@ -189,7 +189,18 @@
     document.querySelectorAll('.transfer-button').forEach(button => {
         button.addEventListener('click', function () {
             const cardTitle = this.closest('.transaction-card').querySelector('.card-title').textContent;
-            alert(`Serviciu selectat: ${cardTitle}`);
+            if (cardTitle.toLowerCase().includes('p2p')) {
+                // Check if user is authenticated
+                if ('@User.Identity.IsAuthenticated' === 'True') {
+                    window.location.href = '@Url.Action("p2p", "transfer")';
+                } else {
+                    if (confirm('Pentru a accesa această funcționalitate, trebuie să vă autentificați. Doriți să continuați?')) {
+                        window.location.href = '@Url.Action("Index", "Login", new { returnUrl = Url.Action("p2p", "transfer") })';
+                    }
+                }
+            } else {
+                alert(`Serviciu selectat: ${cardTitle}`);
+            }
         });
     });
 </script>
