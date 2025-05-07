@@ -55,9 +55,11 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Bank Sender</th>
+                                    <th>Sender Name</th>
                                     <th>Card Sender</th>
                                     <th>Amount</th>
                                     <th>Card Beneficiary</th>
+                                    <th>Beneficiary Name</th>
                                     <th>Bank Beneficiary</th>
                                     <th>Transfer Date</th>
                                 </tr>
@@ -68,9 +70,11 @@
                                     <tr>
                                         <td>@transfer.Id</td>
                                         <td>@transfer.BankSender</td>
+                                        <td>@transfer.SenderName</td>
                                         <td>@transfer.CardSender</td>
                                         <td>@transfer.Amount.ToString("C")</td>
                                         <td>@transfer.CardBeneficiary</td>
+                                        <td>@transfer.BeneficiaryName</td>
                                         <td>@transfer.BankBeneficiary</td>
                                         <td>@transfer.TransferDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                     </tr>

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace eUseControl.Web.Data
 {
-    public class DatabaseInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
+    public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {

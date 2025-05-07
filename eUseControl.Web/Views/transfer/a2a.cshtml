@@ -240,22 +240,23 @@
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            if (response.ok) {
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
                 document.getElementById('successMessage').style.display = 'block';
                 document.getElementById('errorMessage').style.display = 'none';
                 // Clear the form
                 document.getElementById('transferForm').reset();
                 document.getElementById('transferButton').disabled = true;
-                // Hide success message after 3 seconds
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 3000);
             } else {
-                throw new Error('Transfer failed');
+                document.getElementById('errorMessage').textContent = data.error || 'A apărut o eroare la efectuarea transferului.';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                return;
             }
         })
         .catch(error => {
+            document.getElementById('errorMessage').textContent = error.message || 'A apărut o eroare la efectuarea transferului.';
             document.getElementById('errorMessage').style.display = 'block';
             document.getElementById('successMessage').style.display = 'none';
             console.error('Error:', error);

@@ -12,6 +12,9 @@ namespace eUseControl.Web.Models
         public string BankSender { get; set; } = "Maib";
 
         [Required]
+        public string SenderName { get; set; }
+
+        [Required]
         public string CardSender { get; set; }
 
         [Required]
@@ -20,6 +23,9 @@ namespace eUseControl.Web.Models
 
         [Required]
         public string CardBeneficiary { get; set; }
+
+        [Required]
+        public string BeneficiaryName { get; set; }
 
         [Required]
         public string BankBeneficiary { get; set; } = "Maib";

@@ -9,7 +9,7 @@ namespace eUseControl.Web.Data
     {
         public ApplicationDbContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            Database.SetInitializer(new DatabaseInitializer());
         }
 
         public DbSet<User> Users { get; set; }
@@ -19,6 +19,15 @@ namespace eUseControl.Web.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            
+            // Configure TransferCard entity
+            modelBuilder.Entity<TransferCard>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<TransferCard>()
+                .Property(t => t.Amount)
+                .HasPrecision(18, 2);
+
             base.OnModelCreating(modelBuilder);
         }
     }

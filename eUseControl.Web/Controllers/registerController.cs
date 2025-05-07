@@ -125,6 +125,28 @@ namespace eUseControl.Web.Controllers
                     _context.Users.Add(user);
                     _context.SaveChanges();
 
+                    // Auto-login after registration
+                    var authTicket = new System.Web.Security.FormsAuthenticationTicket(
+                        1,
+                        user.Email,
+                        DateTime.Now,
+                        DateTime.Now.AddDays(7),
+                        true,
+                        user.Role
+                    );
+                    string encryptedTicket = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new System.Web.HttpCookie("UserAuth", encryptedTicket)
+                    {
+                        HttpOnly = true,
+                        Secure = Request.IsSecureConnection,
+                        Expires = DateTime.Now.AddDays(7)
+                    };
+                    Response.Cookies.Add(authCookie);
+                    Session["UserId"] = user.Id;
+                    Session["UserEmail"] = user.Email;
+                    Session["UserName"] = user.Name;
+                    Session["UserRole"] = user.Role;
+
                     TempData["SuccessMessage"] = "Registration successful!";
                     return RedirectToAction("Index", "Home");
                 }

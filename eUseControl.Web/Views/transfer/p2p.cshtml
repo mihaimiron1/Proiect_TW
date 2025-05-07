@@ -130,61 +130,57 @@
 
 <div class="transfer-section">
     <div class="transfer-title">Transfer rapid de la card la card</div>
-    <div class="cards-container">
-        <div class="card-section">
-            <h2>Expeditor</h2>
-            <div class="card-image">
-                <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
+    @using (Html.BeginForm("CreateP2PTransfer", "transfer", FormMethod.Post, new { id = "transferForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="cards-container">
+            <div class="card-section">
+                <h2>Expeditor</h2>
+                <div class="card-image">
+                    <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
+                </div>
+                <div class="card-details">
+                    <div class="input-group">
+                        <label for="CardSender">Număr card expeditor</label>
+                        <input type="text" id="CardSender" name="CardSender" placeholder="0000 0000 0000 0000" required maxlength="19">
+                    </div>
+                    <div class="input-group">
+                        <label for="SenderName">Prenume Nume Expeditor</label>
+                        <input type="text" id="SenderName" name="SenderName" placeholder="Introdu prenumele și numele" required>
+                    </div>
+                </div>
             </div>
-            <div class="card-details">
-                <div class="input-group">
-                    <label for="expeditor-card">Număr card expeditor</label>
-                    <input type="text" id="expeditor-card" placeholder="0000 0000 0000 0000" required
-                           pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
-                           title="Introdu 16 cifre cu spații după fiecare 4 cifre">
+
+            <div class="transfer-arrow">➔</div>
+
+            <div class="card-section">
+                <h2>Beneficiar</h2>
+                <div class="card-image">
+                    <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
                 </div>
-                <div class="input-group">
-                    <label for="expeditor-name">Prenume Nume</label>
-                    <input type="text" id="expeditor-name" placeholder="Introdu prenumele și numele" required>
-                </div>
-                <div class="input-group">
-                    <label for="expeditor-validity">Perioada de valabilitate</label>
-                    <input type="text" id="expeditor-validity" placeholder="MM/YY" required
-                           pattern="\d{2}\/\d{2}"
-                           title="Introdu luna și anul în format MM/YY">
+                <div class="card-details">
+                    <div class="input-group">
+                        <label for="CardBeneficiary">Număr card beneficiar</label>
+                        <input type="text" id="CardBeneficiary" name="CardBeneficiary" placeholder="0000 0000 0000 0000" required maxlength="19">
+                    </div>
+                    <div class="input-group">
+                        <label for="BeneficiaryName">Prenume Nume Beneficiar</label>
+                        <input type="text" id="BeneficiaryName" name="BeneficiaryName" placeholder="Introdu prenumele și numele" required>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="transfer-arrow">➔</div>
-
-        <div class="card-section">
-            <h2>Beneficiar</h2>
-            <div class="card-image">
-                <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
+        <div class="amount-section">
+            <div class="input-group">
+                <label for="Amount">Sumă (MDL)</label>
+                <input type="number" id="Amount" name="Amount" placeholder="Introdu suma" required min="1">
             </div>
-            <div class="card-details">
-                <div class="input-group">
-                    <label for="beneficiar-card">Număr card beneficiar</label>
-                    <input type="text" id="beneficiar-card" placeholder="0000 0000 0000 0000" required
-                           pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
-                           title="Introdu 16 cifre cu spații după fiecare 4 cifre">
-                </div>
-                <div class="input-group">
-                    <label for="beneficiar-name">Prenume Nume</label>
-                    <input type="text" id="beneficiar-name" placeholder="Introdu prenumele și numele" required>
-                </div>
-            </div>
+            <button type="submit" class="transfer-button" id="transferButton" disabled>Transferă acum</button>
+            <div class="success-message" id="successMessage" style="display:none; color:#28a745; margin-top:1rem;">Transferul a fost efectuat cu succes!</div>
+            <div class="error-message" id="errorMessage" style="display:none; color:#dc3545; margin-top:1rem;">A apărut o eroare la efectuarea transferului.</div>
         </div>
-    </div>
-
-    <div class="amount-section">
-        <div class="input-group">
-            <label for="amount">Sumă (MDL)</label>
-            <input type="number" id="amount" placeholder="Introdu suma">
-        </div>
-        <button class="transfer-button" id="transferButton" disabled>Transferă acum</button>
-    </div>
+    }
 </div>
 
 @section scripts {
@@ -209,7 +205,7 @@
         // Input Validation
         function validateForm() {
             const inputs = document.querySelectorAll('input[required]');
-            const amount = document.getElementById('amount');
+            const amount = document.getElementById('Amount');
             const button = document.getElementById('transferButton');
 
             let isValid = true;
@@ -223,33 +219,53 @@
         }
 
         // Event Listeners
-        document.getElementById('expeditor-card').addEventListener('input', function (e) {
+        document.getElementById('CardSender').addEventListener('input', function (e) {
             formatCardNumber(e.target);
             validateForm();
         });
 
-        document.getElementById('beneficiar-card').addEventListener('input', function (e) {
+        document.getElementById('CardBeneficiary').addEventListener('input', function (e) {
             formatCardNumber(e.target);
             validateForm();
         });
 
-        document.getElementById('expeditor-validity').addEventListener('input', function (e) {
-            formatExpiryDate(e.target);
-            validateForm();
-        });
+        document.getElementById('Amount').addEventListener('input', validateForm);
 
-        // Add validation for all inputs
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', validateForm);
-        });
-
-        // Transfer Button Handler
-        document.getElementById('transferButton').addEventListener('click', function (e) {
-            if (!this.disabled) {
-                e.preventDefault();
-                alert('Transfer inițiat!');
-                // Add actual transfer logic here
-            }
+        // Form submission handler (AJAX)
+        document.getElementById('transferForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/transfer/CreateP2PTransfer', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const text = await response.text();
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        document.getElementById('successMessage').style.display = 'block';
+                        document.getElementById('errorMessage').style.display = 'none';
+                        document.getElementById('transferForm').reset();
+                        document.getElementById('transferButton').disabled = true;
+                    } else {
+                        document.getElementById('errorMessage').textContent = data.error || 'A apărut o eroare la efectuarea transferului.';
+                        document.getElementById('errorMessage').style.display = 'block';
+                        document.getElementById('successMessage').style.display = 'none';
+                    }
+                } catch (err) {
+                    // Not JSON, probably HTML (login page or error)
+                    document.getElementById('errorMessage').textContent = 'You are not logged in. Please log in and try again.';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                document.getElementById('errorMessage').textContent = error.message || 'A apărut o eroare la efectuarea transferului.';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                console.error('Error:', error);
+            });
         });
     </script>
 }

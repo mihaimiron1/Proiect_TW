@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using eUseControl.Web.Models;
 using System.Web;
+using System.Linq;
 
 namespace eUseControl.Web.Controllers
 {
@@ -24,6 +25,11 @@ namespace eUseControl.Web.Controllers
 
         public ActionResult Dashboard()
         {
+            using (var db = new eUseControl.Web.Data.ApplicationDbContext())
+            {
+                var transfers = db.TransferCards.OrderByDescending(t => t.TransferDate).ToList();
+                ViewBag.A2ATransfers = transfers;
+            }
             return View();
         }
     }

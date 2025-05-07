@@ -123,6 +123,26 @@ namespace Lab_1.Controllers
             if (!IsUserAuthenticated())
                 return Json(new { success = false, error = "Authentication required" });
 
+            // Set names from session BEFORE validation
+            if (Session["UserName"] != null)
+            {
+                transfer.SenderName = Session["UserName"].ToString();
+                transfer.BeneficiaryName = Session["UserName"].ToString();
+            }
+            else
+            {
+                return Json(new { success = false, error = "User session expired" });
+            }
+
+            // Remove validation errors for all possible keys
+            foreach (var key in ModelState.Keys.ToList())
+            {
+                if (key.EndsWith("SenderName") || key.EndsWith("BeneficiaryName"))
+                {
+                    ModelState.Remove(key);
+                }
+            }
+
             try
             {
                 if (ModelState.IsValid)
@@ -130,11 +150,47 @@ namespace Lab_1.Controllers
                     transfer.BankSender = "Maib";
                     transfer.BankBeneficiary = "Maib";
                     transfer.TransferDate = DateTime.Now;
-                    
+
                     _transferCardService.CreateTransfer(transfer);
-                    return Json(new { success = true });
+                    return Json(new { success = true, message = "Transfer created successfully" });
                 }
-                return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+                return Json(new { success = false, error = string.Join(", ", errors) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult CreateP2PTransfer(TransferCard transfer)
+        {
+            if (!IsUserAuthenticated())
+                return Json(new { success = false, error = "Authentication required" });
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    transfer.BankSender = "Maib";
+                    transfer.BankBeneficiary = "Maib";
+                    transfer.TransferDate = DateTime.Now;
+                    // Uncomment if you add TransferType to the model:
+                    // transfer.TransferType = "P2P";
+
+                    _transferCardService.CreateTransfer(transfer);
+                    return Json(new { success = true, message = "Transfer created successfully" });
+                }
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+                return Json(new { success = false, error = string.Join(", ", errors) });
             }
             catch (Exception ex)
             {
