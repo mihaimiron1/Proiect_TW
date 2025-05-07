@@ -141,6 +141,22 @@ namespace eUseControl.Web.Controllers
             return View("Index", user);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (user == null || user.Email == "admin@admin")
+            {
+                TempData["ErrorMessage"] = "Cannot delete this user.";
+                return RedirectToAction("ViewDatabase");
+            }
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+            TempData["SuccessMessage"] = "User deleted successfully.";
+            return RedirectToAction("ViewDatabase");
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

@@ -254,7 +254,7 @@
     <Compile Include="Controllers\ObligatiuniController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\profileController.cs" />
-    <Compile Include="Controllers\registerController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\transferController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
