@@ -1,7 +1,234 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "t2c";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>supply</h2>
+<style>
+    body {
+        background: linear-gradient(180deg, white 62%, #0C9CA7 91%) fixed no-repeat;
+        min-height: 145vh;
+    }
+    .transfer-section {
+        position: absolute;
+        top: 25%;
+        left: 5%;
+        width: 90%;
+        text-align: center;
+        margin-bottom: 150px;
+    }
+    .transfer-title {
+        font-size: 2rem;
+        color: #163B3D;
+        margin-bottom: 2rem;
+    }
+    .cards-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    .card-section {
+        width: 45%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .card-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+    .card-details {
+        width: 100%;
+    }
+    .card-details h2 {
+        color: #163B3D;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+    .input-group {
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+    .input-group label {
+        display: block;
+        color: #6D9C9A;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #163B3D;
+        background: #e0e0e0;
+    }
+    .input-group input:focus {
+        outline: none;
+        background: #d0d0d0;
+    }
+    .transfer-arrow {
+        font-size: 2rem;
+        color: #163B3D;
+        position: absolute;
+        left: 50%;
+        top: 36%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+    .amount-section {
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .amount-section .input-group {
+        max-width: 300px;
+        margin: 0 auto 1.5rem;
+    }
+    .transfer-button {
+        background: #0B9CA6;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .transfer-button:hover:not(:disabled) {
+        background: #1E4445;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+    .transfer-button:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+</style>
+
+<div class="transfer-section">
+    <div class="transfer-title">Transfer internațional la card (T2C)</div>
+    @using (Html.BeginForm("CreateT2CTransfer", "transfer", FormMethod.Post, new { id = "transferForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="cards-container">
+            <div class="card-section">
+                <h2>Expeditor</h2>
+                <div class="card-image">
+                    <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
+                </div>
+                <div class="card-details">
+                    <div class="input-group">
+                        <label for="CardSender">Număr card expeditor</label>
+                        <input type="text" id="CardSender" name="CardSender" placeholder="0000 0000 0000 0000" required maxlength="19">
+                    </div>
+                    <div class="input-group">
+                        <label for="SenderName">Prenume Nume Expeditor</label>
+                        <input type="text" id="SenderName" name="SenderName" placeholder="Introdu prenumele și numele" required>
+                    </div>
+                </div>
+            </div>
+            <div class="transfer-arrow">➔</div>
+            <div class="card-section">
+                <h2>Beneficiar</h2>
+                <div class="card-image">
+                    <img src="~/Content/Images/transfer/AMC_black_card.png" alt="Card Expeditor">
+                </div>
+                <div class="card-details">
+                    <div class="input-group">
+                        <label for="CardBeneficiary">Număr card beneficiar</label>
+                        <input type="text" id="CardBeneficiary" name="CardBeneficiary" placeholder="0000 0000 0000 0000" required maxlength="19">
+                    </div>
+                    <div class="input-group">
+                        <label for="BeneficiaryName">Prenume Nume Beneficiar</label>
+                        <input type="text" id="BeneficiaryName" name="BeneficiaryName" placeholder="Introdu prenumele și numele" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Bank">Banca</label>
+                        <input type="text" id="Bank" name="Bank" placeholder="Introdu banca" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="amount-section">
+            <div class="input-group">
+                <label for="Amount">Sumă (MDL)</label>
+                <input type="number" id="Amount" name="Amount" placeholder="Introdu suma" required min="1">
+            </div>
+            <button type="submit" class="transfer-button" id="transferButton" disabled>Transferă acum</button>
+            <div class="success-message" id="successMessage" style="display:none; color:#28a745; margin-top:1rem;">Transferul a fost efectuat cu succes!</div>
+            <div class="error-message" id="errorMessage" style="display:none; color:#dc3545; margin-top:1rem;">A apărut o eroare la efectuarea transferului.</div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\D/g, '').substring(0, 16);
+            let formatted = value.match(/.{1,4}/g);
+            input.value = formatted ? formatted.join(' ') : '';
+        }
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[required]');
+            const amount = document.getElementById('Amount');
+            const button = document.getElementById('transferButton');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.checkValidity()) isValid = false;
+            });
+            if (!amount.value || isNaN(amount.value) || amount.value <= 0) isValid = false;
+            button.disabled = !isValid;
+        }
+        document.getElementById('CardSender').addEventListener('input', function (e) {
+            formatCardNumber(e.target);
+            validateForm();
+        });
+        document.getElementById('CardBeneficiary').addEventListener('input', function (e) {
+            formatCardNumber(e.target);
+            validateForm();
+        });
+        document.getElementById('Amount').addEventListener('input', validateForm);
+        document.getElementById('Bank').addEventListener('input', validateForm);
+        document.getElementById('transferForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/transfer/CreateT2CTransfer', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const text = await response.text();
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        document.getElementById('successMessage').style.display = 'block';
+                        document.getElementById('errorMessage').style.display = 'none';
+                        document.getElementById('transferForm').reset();
+                        document.getElementById('transferButton').disabled = true;
+                    } else {
+                        document.getElementById('errorMessage').textContent = data.error || 'A apărut o eroare la efectuarea transferului.';
+                        document.getElementById('errorMessage').style.display = 'block';
+                        document.getElementById('successMessage').style.display = 'none';
+                    }
+                } catch (err) {
+                    document.getElementById('errorMessage').textContent = 'You are not logged in. Please log in and try again.';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                document.getElementById('errorMessage').textContent = error.message || 'A apărut o eroare la efectuarea transferului.';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+}
 
