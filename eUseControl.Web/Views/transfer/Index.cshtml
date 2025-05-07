@@ -158,7 +158,7 @@
         <div class="transaction-card card-1">
             <h2 class="card-title">transfer de la card la card P2P</h2>
             <p class="card-description">transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
-            <button class="transfer-button">Transferă acum</button>
+            <a class="transfer-button" href="@Url.Action("p2p", "transfer")">Transferă acum</a>
         </div>
 
         <!-- Card 2 -->
@@ -183,24 +183,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Add click functionality to buttons
-    document.querySelectorAll('.transfer-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const cardTitle = this.closest('.transaction-card').querySelector('.card-title').textContent;
-            if (cardTitle.toLowerCase().includes('p2p')) {
-                // Check if user is authenticated
-                if ('@User.Identity.IsAuthenticated' === 'True') {
-                    window.location.href = '@Url.Action("p2p", "transfer")';
-                } else {
-                    if (confirm('Pentru a accesa această funcționalitate, trebuie să vă autentificați. Doriți să continuați?')) {
-                        window.location.href = '@Url.Action("Index", "Login", new { returnUrl = Url.Action("p2p", "transfer") })';
-                    }
-                }
-            } else {
-                alert(`Serviciu selectat: ${cardTitle}`);
-            }
-        });
-    });
-</script>

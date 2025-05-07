@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using eUseControl.Web.Models;
 using eUseControl.Web.Services;
+using System.Web.Security;
+using eUseControl.Web.Data;
+
 
 namespace Lab_1.Controllers
 {
@@ -19,7 +22,43 @@ namespace Lab_1.Controllers
 
         private bool IsUserAuthenticated()
         {
-            return Session["UserId"] != null;
+            // Check session first
+            if (Session["UserId"] != null)
+                return true;
+
+            // Check authentication cookie
+            if (Request.Cookies["UserAuth"] != null)
+            {
+                try
+                {
+                    var authCookie = Request.Cookies["UserAuth"];
+                    var ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                    if (ticket != null && !ticket.Expired)
+                    {
+                        // Restore session data from cookie
+                        var userEmail = ticket.Name;
+                        using (var context = new ApplicationDbContext())
+                        {
+                            var user = context.Users.FirstOrDefault(u => u.Email == userEmail);
+                            if (user != null)
+                            {
+                                Session["UserId"] = user.Id;
+                                Session["UserEmail"] = user.Email;
+                                Session["UserName"] = user.Name;
+                                Session["UserRole"] = user.Role;
+                                return true;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // If there's any error with the cookie, treat as not authenticated
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         private ActionResult RedirectToLogin()

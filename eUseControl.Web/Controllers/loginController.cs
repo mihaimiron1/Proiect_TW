@@ -6,6 +6,9 @@ using eUseControl.Web.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using System.Net;
+using System.Web.Security;
+using System.Web;
+using eUseControl.Helpers;
 
 namespace eUseControl.Web.Controllers
 {
@@ -33,11 +36,11 @@ namespace eUseControl.Web.Controllers
                 var adminUser = _context.Users.FirstOrDefault(u => u.Email == "admin@admin");
                 if (adminUser == null)
                 {
-                    // Create admin user
+                    // Create admin user with hashed password
                     adminUser = new User
                     {
                         Email = "admin@admin",
-                        Password = "admin1",
+                        Password = PasswordHasher.HashPassword("admin1"),
                         Name = "Administrator",
                         Role = "Admin",
                         CreatedAt = DateTime.Now
@@ -85,103 +88,163 @@ namespace eUseControl.Web.Controllers
             return ipAddress;
         }
 
-        // GET: Login
+        [HttpGet]
         public ActionResult Index()
         {
+            // Check if user is already authenticated via cookie
+            if (Request.Cookies["UserAuth"] != null)
+            {
+                var authCookie = Request.Cookies["UserAuth"];
+                try
+                {
+                    var ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                    if (ticket != null && !ticket.Expired)
+                    {
+                        // User is already authenticated, redirect to appropriate page
+                        if (ticket.UserData == "Admin")
+                        {
+                            return RedirectToAction("Dashboard", "Admin");
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    // Invalid cookie, clear it
+                    var expiredCookie = new HttpCookie("UserAuth", "")
+                    {
+                        Expires = DateTime.Now.AddDays(-1),
+                        HttpOnly = true,
+                        Secure = Request.IsSecureConnection
+                    };
+                    Response.Cookies.Add(expiredCookie);
+                }
+            }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(FormCollection form)
+        public ActionResult Index(string email, string password)
         {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                ModelState.AddModelError("", "Please enter both email and password.");
+                return View();
+            }
+
             try
             {
-                // Check if database exists and create if it doesn't
-                if (!_context.Database.Exists())
+                // Check if user exists in the database
+                var user = _context.Users.FirstOrDefault(u => u.Email == email);
+
+                // Create a new login record
+                var loginRecord = new LoginRecord
                 {
-                    _context.Database.Create();
-                }
+                    Email = email,
+                    LoginTime = DateTime.Now,
+                    IPAddress = GetClientIPAddress(),
+                    Success = false
+                };
 
-                string email = form["email"];
-                string password = form["password"];
-
-                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                if (user == null)
                 {
-                    ModelState.AddModelError("", "Email and password are required.");
-                    return View();
-                }
-
-                try
-                {
-                    // Check if user exists in the database
-                    var user = _context.Users.FirstOrDefault(u => u.Email == email);
-
-                    // Create a new login record
-                    var loginRecord = new LoginRecord
-                    {
-                        Email = email,
-                        LoginTime = DateTime.Now,
-                        IPAddress = GetClientIPAddress(),
-                        Success = false
-                    };
-
-                    if (user == null)
-                    {
-                        // User doesn't exist - show error message but stay on login page
-                        ModelState.AddModelError("", "User not found.");
-                        _context.LoginRecords.Add(loginRecord);
-                        _context.SaveChanges();
-                        return View();
-                    }
-
-                    if (user.Password != password) // Note: In production, use proper password hashing
-                    {
-                        ModelState.AddModelError("", "Password incorrect.");
-                        _context.LoginRecords.Add(loginRecord);
-                        _context.SaveChanges();
-                        return View();
-                    }
-
-                    // Login successful
-                    loginRecord.Success = true;
+                    ModelState.AddModelError("", "User not found.");
                     _context.LoginRecords.Add(loginRecord);
                     _context.SaveChanges();
-
-                    // Set session variables
-                    Session["UserId"] = user.Id;
-                    Session["UserEmail"] = user.Email;
-                    Session["UserName"] = user.Name;
-                    Session["UserRole"] = user.Role;
-                    
-                    // If user is admin, redirect to admin dashboard
-                    if (user.Role == "Admin")
-                    {
-                        return RedirectToAction("Dashboard", "Admin");
-                    }
-                    
-                    // Check if there's a return URL for non-admin users
-                    string returnUrl = Request.QueryString["returnUrl"];
-                    if (!string.IsNullOrEmpty(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    
-                    return RedirectToAction("Index", "Home");
-                }
-                catch (DbUpdateException dbEx)
-                {
-                    ModelState.AddModelError("", "Database error: " + dbEx.InnerException?.Message ?? dbEx.Message);
                     return View();
                 }
+
+                // Verify the password using the hashed version
+                if (!PasswordHasher.VerifyPassword(password, user.Password))
+                {
+                    ModelState.AddModelError("", "Password incorrect.");
+                    _context.LoginRecords.Add(loginRecord);
+                    _context.SaveChanges();
+                    return View();
+                }
+
+                // Login successful
+                loginRecord.Success = true;
+                _context.LoginRecords.Add(loginRecord);
+                _context.SaveChanges();
+
+                // Create authentication ticket
+                var authTicket = new FormsAuthenticationTicket(
+                    1,                              // Version
+                    user.Email,                     // User name
+                    DateTime.Now,                   // Issue time
+                    DateTime.Now.AddDays(7),        // Expiration time (7 days)
+                    true,                          // Persistent
+                    user.Role                      // User data (role)
+                );
+
+                // Encrypt the ticket
+                string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+
+                // Create the cookie
+                var authCookie = new HttpCookie("UserAuth", encryptedTicket)
+                {
+                    HttpOnly = true,
+                    Secure = Request.IsSecureConnection,
+                    Expires = DateTime.Now.AddDays(7)
+                };
+
+                // Add the cookie to the response
+                Response.Cookies.Add(authCookie);
+
+                // Set session variables
+                Session["UserId"] = user.Id;
+                Session["UserEmail"] = user.Email;
+                Session["UserName"] = user.Name;
+                Session["UserRole"] = user.Role;
+
+                // If user is admin, redirect to admin dashboard
+                if (user.Role == "Admin")
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+
+                // Check if there's a return URL for non-admin users
+                string returnUrl = Request.QueryString["returnUrl"];
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Database connection error: " + ex.Message);
-                // Log the full error details
+                ModelState.AddModelError("", "An error occurred during login: " + ex.Message);
                 System.Diagnostics.Debug.WriteLine("Login Error: " + ex.ToString());
                 return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            // Sign out from forms authentication
+            FormsAuthentication.SignOut();
+
+            // Clear the authentication cookie
+            if (Request.Cookies["UserAuth"] != null)
+            {
+                var authCookie = new HttpCookie("UserAuth", "")
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    HttpOnly = true,
+                    Secure = Request.IsSecureConnection
+                };
+                Response.Cookies.Add(authCookie);
+            }
+
+            // Clear the session
+            Session.Clear();
+            Session.Abandon();
+
+            // Redirect to home page
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Login/ViewLoginHistory

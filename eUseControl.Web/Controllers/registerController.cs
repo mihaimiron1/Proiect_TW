@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using eUseControl.Helpers;
 
 namespace eUseControl.Web.Controllers
 {
@@ -117,6 +118,9 @@ namespace eUseControl.Web.Controllers
 
                     // Set creation date
                     user.CreatedAt = DateTime.Now;
+
+                    // Hash the password before saving
+                    user.Password = PasswordHasher.HashPassword(user.Password);
 
                     _context.Users.Add(user);
                     _context.SaveChanges();

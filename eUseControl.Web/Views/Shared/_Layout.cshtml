@@ -226,7 +226,16 @@
         </a>
         <div class="header-buttons">
             <a href="@Url.Action("aboutus", "AMC")" class="header-button">Despre noi</a>
-            <a href="@Url.Action("Index", "Login")" class="header-button">Logare</a>
+            @if (Session["UserEmail"] != null)
+            {
+
+                <a href="@Url.Action("Logout", "Login")" class="header-button">Deconectare</a>
+                <span class="header-button" style="color: var(--primary-medium);">@Session["UserName"]</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "Login")" class="header-button">Logare</a>
+            }
         </div>
     </div>
 
