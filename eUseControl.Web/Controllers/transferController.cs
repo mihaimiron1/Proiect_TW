@@ -197,5 +197,36 @@ namespace Lab_1.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult CreateT2CTransfer(TransferCard transfer)
+        {
+            if (!IsUserAuthenticated())
+                return Json(new { success = false, error = "Authentication required" });
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    transfer.BankSender = "Maib";
+                    // Setează BankBeneficiary din caseta Bank
+                    if (!string.IsNullOrEmpty(Request.Form["Bank"]))
+                        transfer.BankBeneficiary = Request.Form["Bank"];
+                    transfer.TransferDate = DateTime.Now;
+                    _transferCardService.CreateTransfer(transfer);
+                    return Json(new { success = true, message = "Transfer created successfully" });
+                }
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+                return Json(new { success = false, error = string.Join(", ", errors) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
     }
 }

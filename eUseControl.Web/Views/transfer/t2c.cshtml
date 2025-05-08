@@ -6,7 +6,7 @@
 <style>
     body {
         background: linear-gradient(180deg, white 62%, #0C9CA7 91%) fixed no-repeat;
-        min-height: 145vh;
+        min-height: 148vh;
     }
     .transfer-section {
         position: absolute;
@@ -149,8 +149,8 @@
                         <input type="text" id="BeneficiaryName" name="BeneficiaryName" placeholder="Introdu prenumele și numele" required>
                     </div>
                     <div class="input-group">
-                        <label for="Bank">Banca</label>
-                        <input type="text" id="Bank" name="Bank" placeholder="Introdu banca" required>
+                        <label for="BankBeneficiary">Banca</label>
+                        <input type="text" id="BankBeneficiary" name="BankBeneficiary" placeholder="Introdu banca" required>
                     </div>
                 </div>
             </div>
@@ -194,7 +194,7 @@
             validateForm();
         });
         document.getElementById('Amount').addEventListener('input', validateForm);
-        document.getElementById('Bank').addEventListener('input', validateForm);
+        document.getElementById('BankBeneficiary').addEventListener('input', validateForm);
         document.getElementById('transferForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
