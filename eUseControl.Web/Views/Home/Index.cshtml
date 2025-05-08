@@ -50,6 +50,12 @@
         font-size: 1.5rem;
         font-weight: 700;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .details-button:hover, .details-button:focus, .details-button:active {
+        text-decoration: none;
+        color: white;
     }
 
     /* Services section */
@@ -114,7 +120,7 @@
             <span class="logo-italic">AMC bank</span><br>
             în câteva clipe!
         </h1>
-        <button class="details-button">detalii</button>
+        <a href="@Url.Action("Index", "Card")" class="details-button">detalii</a>
     </div>
 </div>
 
