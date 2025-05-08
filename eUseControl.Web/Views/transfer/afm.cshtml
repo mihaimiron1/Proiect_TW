@@ -1,7 +1,108 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "afm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>account to account</h2>
+<style>
+    body {
+        background: linear-gradient(180deg, white 62%, #0C9CA7 91%) fixed no-repeat;
+        min-height: 100vh;
+    }
+    .afm-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    .afm-form {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        padding: 40px 32px 32px 32px;
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .afm-form h2 {
+        text-align: center;
+        color: #163B3D;
+        margin-bottom: 24px;
+    }
+    .afm-form .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .afm-form label {
+        color: #6D9C9A;
+        font-size: 0.95rem;
+    }
+    .afm-form input, .afm-form textarea {
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 1rem;
+        background: #e0e0e0;
+        color: #163B3D;
+    }
+    .afm-form input:focus, .afm-form textarea:focus {
+        outline: none;
+        background: #d0d0d0;
+    }
+    .afm-form .amount-group {
+        max-width: 180px;
+        margin: 0 auto 10px auto;
+    }
+    .afm-form .submit-btn {
+        background: #0B9CA6;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 10px;
+    }
+    .afm-form .submit-btn:hover:not(:disabled) {
+        background: #1E4445;
+    }
+</style>
+
+<div class="afm-container">
+    <form class="afm-form" id="afmForm">
+        <h2>Ask for Money</h2>
+        <div class="form-group">
+            <label for="FullName">Nume și Prenume</label>
+            <input type="text" id="FullName" name="FullName" placeholder="Introdu numele și prenumele" required>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Număr de telefon</label>
+            <input type="tel" id="PhoneNumber" name="PhoneNumber" placeholder="07xx xxx xxx" required pattern="[0-9+\-\s()]{7,20}">
+        </div>
+        <div class="form-group">
+            <label for="Message">Mesaj dorit</label>
+            <textarea id="Message" name="Message" rows="3" placeholder="Scrie mesajul tău..." required></textarea>
+        </div>
+        <div class="form-group amount-group">
+            <label for="Amount">Sumă (MDL)</label>
+            <input type="number" id="Amount" name="Amount" placeholder="0" min="1" required>
+        </div>
+        <button type="submit" class="submit-btn">Trimite</button>
+    </form>
+</div>
+
+@section scripts {
+    <script>
+        document.getElementById('afmForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aici poți adăuga logica de trimitere AJAX sau validare suplimentară
+            alert('Cererea a fost trimisă!');
+            this.reset();
+        });
+    </script>
+}
 
