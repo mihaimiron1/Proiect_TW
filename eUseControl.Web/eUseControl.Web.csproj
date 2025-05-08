@@ -135,10 +135,14 @@
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\BCrypt.Net-Next.dll" />
+    <Content Include="bin\BCrypt.Net-Next.xml" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\EntityFramework.SqlServer.xml" />
     <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\eUseControl.Helpers.dll" />
+    <Content Include="bin\eUseControl.Helpers.pdb" />
     <Content Include="bin\eUseControl.Web.dll" />
     <Content Include="bin\eUseControl.Web.pdb" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
@@ -177,6 +181,11 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="bin\System.Buffers.dll" />
+    <Content Include="bin\System.Memory.dll" />
+    <Content Include="bin\System.Numerics.Vectors.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
@@ -210,8 +219,12 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Images\Home\Poza_2_oameni_banner_top.png" />
     <Content Include="Content\Images\transfer\AMC_black_card.png" />
+    <Content Include="Content\Images\transfer\card_albastru.png" />
+    <Content Include="Content\Images\transfer\card_rosu.png" />
+    <Content Include="Content\Images\transfer\card_verde.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="bin\eUseControl.Helpers.dll.config" />
     <None Include="bin\eUseControl.Web.dll.config" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -237,6 +250,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -320,6 +334,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Views\Card\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
