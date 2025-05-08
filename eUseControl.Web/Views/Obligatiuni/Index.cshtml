@@ -1,7 +1,116 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Obligatiuni - AMC Bank";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4" style="color: var(--primary-dark);">Obligatiuni AMC Bank</h1>
+            <p class="lead text-center mb-5">Investiti in viitorul dumneavoastra cu obligatiunile noastre</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card h-100" style="border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="card-body text-center">
+                    <h3 style="color: var(--primary-medium);">Obligatiuni Guvernamentale</h3>
+                    <p>Investiti in obligatiuni emise de statul roman, cu dobanzi competitive si risc minim.</p>
+                    <ul class="list-unstyled">
+                        <li>✓ Risc minim</li>
+                        <li>✓ Dobanda garantata</li>
+                        <li>✓ Perioada flexibila</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100" style="border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="card-body text-center">
+                    <h3 style="color: var(--primary-medium);">Obligatiuni Corporative</h3>
+                    <p>Obligatiuni emise de companii private cu potential de crestere a valorii.</p>
+                    <ul class="list-unstyled">
+                        <li>✓ Dobanzi mai mari</li>
+                        <li>✓ Diversificare portofoliu</li>
+                        <li>✓ Lichiditate buna</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100" style="border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="card-body text-center">
+                    <h3 style="color: var(--primary-medium);">Obligatiuni Verzi</h3>
+                    <p>Investiti in proiecte sustenabile si prietenoase cu mediul.</p>
+                    <ul class="list-unstyled">
+                        <li>✓ Impact pozitiv</li>
+                        <li>✓ Beneficii fiscale</li>
+                        <li>✓ Sustinere mediului</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card" style="border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="card-body">
+                    <h3 style="color: var(--primary-medium);">Calculator de Obligatiuni</h3>
+                    <form id="bondCalculator">
+                        <div class="form-group mb-3">
+                            <label for="investment">Suma investita (MDL)</label>
+                            <input type="number" class="form-control" id="investment" min="1000" step="1000" value="10000">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="interest">Dobanda anuala (%)</label>
+                            <input type="number" class="form-control" id="interest" min="1" max="20" step="0.1" value="5">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="years">Perioada (ani)</label>
+                            <input type="number" class="form-control" id="years" min="1" max="30" value="5">
+                        </div>
+                        <button type="button" class="btn" style="background: var(--primary-medium); color: white;" onclick="calculateBond()">Calculeaza</button>
+                    </form>
+                    <div id="result" class="mt-3" style="display: none;">
+                        <h4>Rezultat:</h4>
+                        <p>Valoare finala: <span id="finalValue">0</span> MDL</p>
+                        <p>Dobanda totala: <span id="totalInterest">0</span> MDL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="card-body">
+                    <h3 style="color: var(--primary-medium);">De ce sa investesti in obligatiuni?</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">✓ <strong>Stabilitate</strong> - Investitii sigure cu randament garantat</li>
+                        <li class="mb-3">✓ <strong>Diversificare</strong> - Reducerea riscului prin distribuirea investitiei</li>
+                        <li class="mb-3">✓ <strong>Lichiditate</strong> - Posibilitatea de a vinde obligatiunile in piata secundara</li>
+                        <li class="mb-3">✓ <strong>Flexibilitate</strong> - Multiple optiuni de perioada si dobanda</li>
+                        <li class="mb-3">✓ <strong>Transparenta</strong> - Informatii complete despre conditiile de investitie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function calculateBond() {
+            const investment = parseFloat(document.getElementById('investment').value);
+            const interest = parseFloat(document.getElementById('interest').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+
+            const finalValue = investment * Math.pow(1 + interest, years);
+            const totalInterest = finalValue - investment;
+
+            document.getElementById('finalValue').textContent = finalValue.toFixed(2);
+            document.getElementById('totalInterest').textContent = totalInterest.toFixed(2);
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+}
 
