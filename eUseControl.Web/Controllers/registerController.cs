@@ -25,9 +25,10 @@ namespace eUseControl.Web.Controllers
         }
 
         // GET: Register/ViewDatabase
-        [AllowAnonymous]
         public ActionResult ViewDatabase()
         {
+            if (Session["UserRole"]?.ToString() != "Admin")
+                return RedirectToAction("Index", "Login", new { returnUrl = Request.RawUrl });
             try
             {
                 // Ensure database exists and is up to date

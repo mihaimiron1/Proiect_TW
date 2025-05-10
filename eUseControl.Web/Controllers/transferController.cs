@@ -110,8 +110,8 @@ namespace Lab_1.Controllers
 
         public ActionResult ViewTransferA2A()
         {
-            if (!IsUserAuthenticated())
-                return RedirectToLogin();
+            if (Session["UserRole"]?.ToString() != "Admin")
+                return RedirectToAction("Index", "Login", new { returnUrl = Request.RawUrl });
             var transfers = _transferCardService.GetAllTransfers();
             return View(transfers);
         }
