@@ -292,7 +292,6 @@
     <Content Include="Views\login\Index.cshtml" />
     <Content Include="Views\register\index.cshtml" />
     <Content Include="Views\profile\Index.cshtml" />
-    <Content Include="Views\profile\cards.cshtml" />
     <Content Include="Views\history\Index.cshtml" />
     <Content Include="Views\Pay\Index.cshtml" />
     <Content Include="Views\Pay\charity.cshtml" />

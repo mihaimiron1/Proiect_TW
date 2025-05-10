@@ -148,6 +148,9 @@ namespace eUseControl.Web.Controllers
                     Session["UserEmail"] = user.Email;
                     Session["UserName"] = user.Name;
                     Session["UserRole"] = user.Role;
+                    Session["UserPhone"] = user.PhoneNumber;
+                    Session["UserCity"] = user.City;
+                    Session["UserCountry"] = user.Country;
 
                     TempData["SuccessMessage"] = "Registration successful!";
                     return RedirectToAction("Index", "Home");

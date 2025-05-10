@@ -237,10 +237,13 @@
             {
                 if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Admin")
                 {
-                    <a href="@Url.Action("Dashboard", "Admin")" class="header-button">Admin Dashboard</a>
+                    <a href="@Url.Action("Dashboard", "Admin")" class="header-button" style="color: var(--primary-medium);">Administrator</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "profile")" class="header-button" style="color: var(--primary-medium);">@Session["UserName"]</a>
                 }
                 <a href="@Url.Action("Logout", "Login")" class="header-button">Deconectare</a>
-                <span class="header-button" style="color: var(--primary-medium);">@Session["UserName"]</span>
             }
             else
             {

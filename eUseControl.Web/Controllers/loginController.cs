@@ -198,6 +198,9 @@ namespace eUseControl.Web.Controllers
                 Session["UserEmail"] = user.Email;
                 Session["UserName"] = user.Name;
                 Session["UserRole"] = user.Role;
+                Session["UserPhone"] = user.PhoneNumber;
+                Session["UserCity"] = user.City;
+                Session["UserCountry"] = user.Country;
 
                 // If user is admin, redirect to admin dashboard
                 if (user.Role == "Admin")
