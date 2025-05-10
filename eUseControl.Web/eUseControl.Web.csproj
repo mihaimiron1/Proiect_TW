@@ -252,10 +252,12 @@
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CardController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginRecord.cs" />
+    <Compile Include="Models\SupportTable.cs" />
     <Compile Include="Models\TransferCard.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
@@ -336,6 +338,7 @@
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Views\Card\Index.cshtml" />
+    <Content Include="Views\Support\ViewSupportMessages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

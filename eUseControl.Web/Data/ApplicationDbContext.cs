@@ -15,6 +15,7 @@ namespace eUseControl.Web.Data
         public DbSet<User> Users { get; set; }
         public DbSet<LoginRecord> LoginRecords { get; set; }
         public DbSet<TransferCard> TransferCards { get; set; }
+        public DbSet<SupportTable> SupportTable { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -215,6 +215,13 @@
             font-size: 14px;
             color: #163B3D;
         }
+
+        .popup .error-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -268,25 +275,48 @@
         <h3>Ajutor și suport</h3>
         <p>Cu ce te putem ajuta astăzi?</p>
         <textarea placeholder="Scrie mesajul tău aici..."></textarea>
-        <button onclick="sendMessage()">Trimite</button>
+        <button type="button" onclick="sendMessage(event)">Trimite</button>
         <div class="confirmation-message" id="confirmationMessage">
             Mulțumim pentru mesaj! Echipa noastră vă va reveni în cel mai scurt timp.
         </div>
+        <div class="error-message" id="errorMessage">
+            Pentru a trimite un mesaj, trebuie să fiți autentificat. Vă rugăm să vă conectați.
+        </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         function togglePopup(e) {
             e.stopPropagation();
             const popup = document.getElementById("popup");
             popup.style.display = popup.style.display === "block" ? "none" : "block";
             document.getElementById("confirmationMessage").style.display = "none";
+            document.getElementById("errorMessage").style.display = "none";
         }
 
-        function sendMessage() {
+        function sendMessage(e) {
+            if (e) e.preventDefault();
             const textarea = document.querySelector('.popup textarea');
             if (textarea.value.trim()) {
-                document.getElementById("confirmationMessage").style.display = "block";
-                textarea.value = "";
+                $.ajax({
+                    url: '@Url.Action("SaveMessage", "Support")',
+                    type: 'POST',
+                    data: { message: textarea.value.trim() },
+                    success: function(response) {
+                        if (response.success) {
+                            document.getElementById("confirmationMessage").style.display = "block";
+                            document.getElementById("errorMessage").style.display = "none";
+                            textarea.value = "";
+                        } else {
+                            document.getElementById("errorMessage").style.display = "block";
+                            document.getElementById("errorMessage").textContent = response.message || "Eroare la salvarea mesajului";
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById("errorMessage").style.display = "block";
+                        document.getElementById("errorMessage").textContent = "Eroare la salvarea mesajului";
+                    }
+                });
             }
         }
 
