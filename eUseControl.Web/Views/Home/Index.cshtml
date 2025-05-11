@@ -58,88 +58,269 @@
         color: white;
     }
 
-    /* Services section */
-    .services-section {
+    /* Exchange Rates section */
+    .exchange-section {
         background: linear-gradient(180deg, var(--primary-light) 48%, white 100%);
-        padding: 0;
+        padding: 60px 0;
         min-height: 60vh;
-        display: flex;
-        align-items: stretch;
     }
 
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
+    .exchange-container {
         width: 95%;
-        max-width: 2300px;
+        max-width: 1400px;
         margin: 0 auto;
-        height: 100%;
-        padding: 32px 0;
     }
 
-    .service-card {
-        background: #67797A;
-        color: white;
-        border-radius: 10px;
-        padding: 32px 24px;
-        min-height: 280px;
-        max-height: 420px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
+    .exchange-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .exchange-header h2 {
+        color: var(--primary-dark);
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .exchange-header p {
+        color: var(--secondary-dark);
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .exchange-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .exchange-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
-        box-sizing: border-box;
     }
 
-    .service-card:hover {
-        transform: translateY(-8px);
+    .exchange-card:hover {
+        transform: translateY(-5px);
     }
 
-    .service-card h2 {
-        font-size: 1.5rem;
+    .currency-pair {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .currency-flag {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 15px;
+        object-fit: cover;
+    }
+
+    .currency-code {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+    }
+
+    .currency-name {
+        color: var(--secondary-dark);
+        font-size: 1.1rem;
+        margin-left: 10px;
+    }
+
+    .rate-value {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--primary-medium);
+        margin: 20px 0;
+    }
+
+    .rate-change {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .rate-change.positive {
+        color: #28a745;
+    }
+
+    .rate-change.negative {
+        color: #dc3545;
+    }
+
+    .rate-change i {
+        margin-right: 8px;
+    }
+
+    .rate-details {
+        background: var(--primary-light);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .rate-details p {
+        margin: 5px 0;
+        color: var(--primary-dark);
+        font-size: 1rem;
+    }
+
+    .last-update {
+        text-align: center;
+        margin-top: 40px;
+        color: var(--secondary-dark);
+        font-size: 0.9rem;
+    }
+
+    /* Exchange Rates Table */
+    .exchange-table-section {
+        padding: 60px 0 30px 0;
+    }
+    .exchange-table-container {
+        width: 95%;
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        padding: 32px 32px 16px 32px;
+    }
+    .exchange-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1.1rem;
+    }
+    .exchange-table th, .exchange-table td {
+        padding: 14px 10px;
+        text-align: center;
+    }
+    .exchange-table th {
+        color: var(--secondary-dark);
+        font-weight: 700;
+        border-bottom: 2px solid #e0e0e0;
+        font-size: 1.05rem;
+        background: #f8fafd;
+    }
+    .exchange-table td {
+        color: var(--primary-dark);
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .exchange-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Currency Converter */
+    .converter-section {
+        padding: 40px 0;
         margin-top: 0;
+    }
+    .converter-container {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        background: #f5f8fa;
+        border-radius: 8px;
+        padding: 32px 32px 24px 32px;
+    }
+    .converter-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 4px;
+    }
+    .converter-sub {
+        color: var(--secondary-dark);
+        font-size: 1rem;
         margin-bottom: 18px;
     }
-
-    .service-card p {
-        font-size: 1.05rem;
-        line-height: 1.5;
-        flex-grow: 1;
+    .converter-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 32px;
+        margin-bottom: 18px;
     }
-
-    .service-button {
-        background: #05FFB9;
+    .converter-col {
+        flex: 1;
+        background: white;
+        border-radius: 8px;
+        padding: 24px 18px 18px 18px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .converter-label {
+        font-size: 1rem;
         color: var(--secondary-dark);
-        border: 1px solid var(--secondary-dark);
-        border-radius: 28px;
-        padding: 14px;
-        text-align: center;
-        margin-top: 18px;
-        cursor: pointer;
+        margin-bottom: 8px;
         font-weight: 600;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
     }
-
-    .service-button:hover {
-        background: var(--secondary-dark);
-        color: #05FFB9;
+    .converter-tabs {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 12px;
     }
-
-    /* Responsive grid */
-    media (max-width: 1200px) {
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+    .converter-tab {
+        background: #e9f2f4;
+        color: var(--primary-dark);
+        border: none;
+        border-radius: 5px;
+        padding: 7px 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
     }
-    media (max-width: 700px) {
-        .services-grid {
-            grid-template-columns: 1fr;
-        }
-        .services-section {
-            min-height: unset;
-        }
+    .converter-tab.active, .converter-tab:focus {
+        background: var(--primary-medium);
+        color: white;
+    }
+    .converter-input {
+        width: 100%;
+        font-size: 2rem;
+        font-weight: 700;
+        border: none;
+        background: transparent;
+        outline: none;
+        color: var(--primary-dark);
+        margin-bottom: 0;
+        text-align: left;
+    }
+    .converter-equals {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--primary-medium);
+        margin: 0 18px;
+    }
+    .converter-date {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+    }
+    .converter-date label {
+        font-size: 0.95rem;
+        color: var(--secondary-dark);
+        margin-bottom: 2px;
+    }
+    .converter-date input[type="date"] {
+        padding: 7px 12px;
+        border-radius: 5px;
+        border: 1px solid #d0d0d0;
+        font-size: 1rem;
+        color: var(--primary-dark);
+        background: white;
+    }
+    .converter-note {
+        font-size: 0.95rem;
+        color: var(--secondary-dark);
+        margin-top: 18px;
     }
 </style>
 
@@ -158,31 +339,124 @@
     </div>
 </div>
 
-<!-- Services Section -->
-<div class="services-section">
-    <div class="services-grid">
-        <div class="service-card">
-            <h2>transfer de la card la card P2P</h2>
-            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
-            <div class="service-button">transferă acum</div>
+<!-- Exchange Rates Table Section -->
+<div class="exchange-table-section">
+    <div class="exchange-table-container">
+        <div class="exchange-header">
+            <h2>Currency Exchange Rates</h2>
         </div>
+        <table class="exchange-table" id="exchange-table">
+            <thead>
+                <tr>
+                    <th>valuta</th>
+                    <th>cumpărare</th>
+                    <th>vânzare</th>
+                    <th>curs BNM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-currency="USD"><td>USD</td><td>17.0700</td><td>17.3500</td><td>17.0909</td></tr>
+                <tr data-currency="EUR"><td>EUR</td><td>19.3600</td><td>19.6300</td><td>19.4229</td></tr>
+                <tr data-currency="RUB"><td>RUB</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr data-currency="RON"><td>RON</td><td>3.7200</td><td>3.8400</td><td>3.8080</td></tr>
+                <tr data-currency="UAH"><td>UAH</td><td>0.3800</td><td>0.4300</td><td>0.4125</td></tr>
+                <tr data-currency="GBP"><td>GBP</td><td>22.7500</td><td>23.1200</td><td>22.8102</td></tr>
+                <tr data-currency="CHF"><td>CHF</td><td>20.6000</td><td>21.0500</td><td>20.7514</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        <div class="service-card">
-            <h2>transfer internațional la card T2C</h2>
-            <p>primește bani din străinătate direct pe card, oricând și oriunde te-ai afla</p>
-            <div class="service-button">transferă acum</div>
-        </div>
-
-        <div class="service-card">
-            <h2>transfer prin număr de telefon</h2>
-            <p>transferă bani prin număr de telefon pe un card din Republica Moldova sau din străinătate</p>
-            <div class="service-button">transferă acum</div>
-        </div>
-
-        <div class="service-card">
-            <h2>ask for money</h2>
-            <p>transferă bani de la card la card în doar câteva minute, rapid și sigur</p>
-            <div class="service-button">transferă acum</div>
+<!-- Currency Converter Section -->
+<div class="converter-section">
+    <div class="converter-container">
+        <div class="converter-title">Convertor valutar</div>
+        <div class="converter-sub">conform cursului comercial al bancii pentru mun. Chisinau</div>
+        <div class="converter-row">
+            <div class="converter-col">
+                <div class="converter-label">pentru</div>
+                <div class="converter-tabs" id="from-tabs">
+                    <button class="converter-tab active" data-currency="MDL">MDL</button>
+                    <button class="converter-tab" data-currency="USD">USD</button>
+                    <button class="converter-tab" data-currency="EUR">EUR</button>
+                    <button class="converter-tab" data-currency="RUB">RUB</button>
+                    <button class="converter-tab" data-currency="RON">RON</button>
+                    <button class="converter-tab" data-currency="UAH">UAH</button>
+                    <button class="converter-tab" data-currency="GBP">GBP</button>
+                    <button class="converter-tab" data-currency="CHF">CHF</button>
+                </div>
+                <input class="converter-input" id="from-amount" value="100.00" />
+            </div>
+            <span class="converter-equals">=</span>
+            <div class="converter-col">
+                <div class="converter-label">vei primi</div>
+                <div class="converter-tabs" id="to-tabs">
+                    <button class="converter-tab active" data-currency="MDL">MDL</button>
+                    <button class="converter-tab" data-currency="USD">USD</button>
+                    <button class="converter-tab" data-currency="EUR">EUR</button>
+                    <button class="converter-tab" data-currency="RUB">RUB</button>
+                    <button class="converter-tab" data-currency="RON">RON</button>
+                    <button class="converter-tab" data-currency="UAH">UAH</button>
+                    <button class="converter-tab" data-currency="GBP">GBP</button>
+                    <button class="converter-tab" data-currency="CHF">CHF</button>
+                </div>
+                <input class="converter-input" id="to-amount" value="100.00" readonly />
+            </div>
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+// Currency rates from the table
+const rates = {
+    MDL: { buy: 1, sell: 1 },
+    USD: { buy: 17.0700, sell: 17.3500 },
+    EUR: { buy: 19.3600, sell: 19.6300 },
+    RUB: { buy: null, sell: null },
+    RON: { buy: 3.7200, sell: 3.8400 },
+    UAH: { buy: 0.3800, sell: 0.4300 },
+    GBP: { buy: 22.7500, sell: 23.1200 },
+    CHF: { buy: 20.6000, sell: 21.0500 }
+};
+
+function updateConverter() {
+    const fromCur = $('#from-tabs .converter-tab.active').data('currency');
+    const toCur = $('#to-tabs .converter-tab.active').data('currency');
+    let amount = parseFloat($('#from-amount').val()) || 0;
+    let result = amount;
+
+    if (fromCur === toCur) {
+        result = amount;
+    } else if (fromCur === 'MDL' && rates[toCur] && rates[toCur].sell) {
+        // MDL to foreign: divide by sell rate
+        result = amount / rates[toCur].sell;
+    } else if (toCur === 'MDL' && rates[fromCur] && rates[fromCur].buy) {
+        // Foreign to MDL: multiply by buy rate
+        result = amount * rates[fromCur].buy;
+    } else if (rates[fromCur] && rates[fromCur].buy && rates[toCur] && rates[toCur].sell) {
+        // Foreign to foreign: convert to MDL, then to target
+        let mdl = amount * rates[fromCur].buy;
+        result = mdl / rates[toCur].sell;
+    } else {
+        result = '';
+    }
+    $('#to-amount').val(result !== '' ? result.toFixed(2) : '');
+}
+
+$(function() {
+    // Tab switching
+    $('.converter-tabs').on('click', '.converter-tab', function() {
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        updateConverter();
+    });
+    // Update output when input changes
+    $('#from-amount').on('input', function() {
+        updateConverter();
+    });
+    // Initial update
+    updateConverter();
+});
+</script>
