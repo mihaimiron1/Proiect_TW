@@ -107,6 +107,17 @@ namespace eUseControl.Web.Controllers
                         }
                         return RedirectToAction("Index", "Home");
                     }
+                    else
+                    {
+                        // Cookie exists but is expired, clear it
+                        var expiredCookie = new HttpCookie("UserAuth", "")
+                        {
+                            Expires = DateTime.Now.AddDays(-1),
+                            HttpOnly = true,
+                            Secure = Request.IsSecureConnection
+                        };
+                        Response.Cookies.Add(expiredCookie);
+                    }
                 }
                 catch (ArgumentException)
                 {
@@ -120,6 +131,11 @@ namespace eUseControl.Web.Controllers
                     Response.Cookies.Add(expiredCookie);
                 }
             }
+
+            // Clear any existing session data
+            Session.Clear();
+            Session.Abandon();
+
             return View();
         }
 
@@ -169,6 +185,10 @@ namespace eUseControl.Web.Controllers
                 _context.LoginRecords.Add(loginRecord);
                 _context.SaveChanges();
 
+                // Clear any existing session data
+                Session.Clear();
+                Session.Abandon();
+
                 // Create authentication ticket
                 var authTicket = new FormsAuthenticationTicket(
                     1,                              // Version
@@ -187,7 +207,8 @@ namespace eUseControl.Web.Controllers
                 {
                     HttpOnly = true,
                     Secure = Request.IsSecureConnection,
-                    Expires = DateTime.Now.AddDays(7)
+                    Expires = DateTime.Now.AddDays(7),
+                    Path = "/"  // Ensure cookie is available for all paths
                 };
 
                 // Add the cookie to the response
@@ -210,7 +231,7 @@ namespace eUseControl.Web.Controllers
 
                 // Check if there's a return URL for non-admin users
                 string returnUrl = Request.QueryString["returnUrl"];
-                if (!string.IsNullOrEmpty(returnUrl))
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
                 }
