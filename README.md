@@ -28,7 +28,6 @@
   - [Installation](#installation)
   - [Usage](#usage)
   - [Troubleshooting](#Troubleshooting)
-- [Project Structure](#project-structure)
 - [License](#license)
 
 ---
@@ -87,12 +86,7 @@ If you encounter errors related to Razor or the compiler platform, run the follo
 Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 ```
 This will reinstall necessary compilation dependencies for ASP.NET.
-
-## Project Structure
-/Controllers       --> Business logic and routing  
-/Models            --> Data models and DB entities  
-/Views             --> Razor views for UI  
-/App_Data          --> Local database storage  
+ 
 ## License
 This project is developed for academic purposes only and should not be used in production environments.
 No warranties or guarantees are provided.
